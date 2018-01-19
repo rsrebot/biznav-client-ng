@@ -10,10 +10,11 @@ import { LoginModule } from '@app/features/login';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { environment } from '@env/environment';
+import { PageNotFoundComponent } from '@app/shared/page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  // { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -26,7 +27,6 @@ const appRoutes: Routes = [
     SharedModule,
     FeaturesModule,
     LoginModule,
-    RouterModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
