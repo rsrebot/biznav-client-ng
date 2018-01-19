@@ -1,15 +1,18 @@
-import { Headers, Http, BaseRequestOptions } from '@angular/http';
-import { TOKEN_NAME } from './auth.service';
-import { AuthService } from "@app/core";
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest} from '@angular/common/http';
+import {TOKEN_NAME, AuthService} from './auth.service';
+
 
 const AUTH_HEADER_KEY = 'Authorization';
 const AUTH_PREFIX = 'Bearer';
 
-export class AuthRequestOptions extends BaseRequestOptions {
-  
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
   constructor(
-      private authService: AuthService) {
-    super();
+      private authService: AuthService) { }
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
     const token = localStorage.getItem(TOKEN_NAME);
     if(token) {
@@ -23,8 +26,9 @@ export class AuthRequestOptions extends BaseRequestOptions {
         // service.refresh(token);
       }
 
-      this.headers.append(AUTH_HEADER_KEY, `${AUTH_PREFIX} ${token}`);
+      req.headers.append(AUTH_HEADER_KEY, `${AUTH_PREFIX} ${token}`);
     }
-  }
 
+    return next.handle(req);
+  }
 }

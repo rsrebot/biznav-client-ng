@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
+import { CoreModule } from '@app/core';
+import { SharedModule } from '@app/shared';
+import { FeaturesModule } from '@app/features';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { AuthRequestOptions } from "@app/core/auth/auth-request";
-import { RequestOptions } from "@angular/http";
-
+import { AuthService, AuthInterceptor } from "@app/core";
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginModule } from '@app/features/login';
 
 @NgModule({
   declarations: [
@@ -14,12 +15,16 @@ import { RequestOptions } from "@angular/http";
   imports: [
     BrowserModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    FeaturesModule,
+    LoginModule
   ],
   providers: [
+    AuthService,
     {
-      provide: RequestOptions,
-      useClass: AuthRequestOptions
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
