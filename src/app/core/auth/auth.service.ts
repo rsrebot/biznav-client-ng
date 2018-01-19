@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import * as jwt_decode from 'jwt-decode';
+import { environment } from '@env/environment';
 
 export const TOKEN_NAME = 'jwt_token';
 
 @Injectable()
 export class AuthService {
 
-  private url = 'http://localhost:5000/token';
+  private url = environment.apiUrl + '/token';
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(private http: Http) { }
@@ -21,7 +22,7 @@ export class AuthService {
   }
 
   getTokenExpirationDate(token: string): Date {
-    const decoded : any = jwt_decode(token);
+    const decoded: any = jwt_decode(token);
 
     if (decoded.exp === undefined) {
       return null;
@@ -52,11 +53,10 @@ export class AuthService {
     return this.http
       .post(`${this.url}`, JSON.stringify({'username': user, 'password': password}), { headers: this.headers })
       .toPromise()
-      .then(res => 
-        { 
+      .then(res => {
           this.setToken(res.json().accessToken);
 
-          return res.text(); 
+          return res.text();
         });
   }
 
