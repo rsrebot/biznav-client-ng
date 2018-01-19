@@ -7,7 +7,7 @@ export const TOKEN_NAME = 'jwt_token';
 @Injectable()
 export class AuthService {
 
-  private url = 'token';
+  private url = 'http://localhost:5000/token';
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(private http: Http) { }
@@ -52,7 +52,12 @@ export class AuthService {
     return this.http
       .post(`${this.url}`, JSON.stringify({'username': user, 'password': password}), { headers: this.headers })
       .toPromise()
-      .then(res => res.text());
+      .then(res => 
+        { 
+          this.setToken(res.json().accessToken);
+
+          return res.text(); 
+        });
   }
 
 }
