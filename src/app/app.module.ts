@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
-import { FeaturesModule, LoginComponent } from '@app/features';
+import { FeaturesModule, LoginComponent, ReportsListComponent } from '@app/features';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AuthService, AuthInterceptor } from '@app/core';
@@ -10,10 +10,12 @@ import { LoginModule } from '@app/features/login';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { environment } from '@env/environment';
-import { PageNotFoundComponent } from '@app/shared/page-not-found/page-not-found.component';
+import { ReportsListModule } from '@app/features/reports-list';
+import { PageNotFoundComponent } from '@app/shared';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'reports', component: ReportsListComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -6,6 +6,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   imports: [
     CommonModule
   ],
+  exports: [
+    PageNotFoundComponent
+  ],
   declarations: [PageNotFoundComponent]
 })
 export class SharedModule { }
