@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
 
   sidebarOpened: boolean = true;
 
-  private _toggleSidebar() {
+  toggleSidebar() {
     this.sidebarOpened = !this.sidebarOpened;
   }
 

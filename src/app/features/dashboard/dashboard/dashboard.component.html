@@ -1,34 +1,37 @@
  <app-nav-bar></app-nav-bar> 
 <div class="conatainer-fluid">
   <div class="row">
-    <!-- <app-left-menu></app-left-menu> -->
     <ng-sidebar-container style="height: 100vh;">
 
-      <!-- A sidebar -->
-      <ng-sidebar [(opened)]="sidebarOpened">
-        <div class="card sidebar-back">
-         <i class="fa fa-left-arrow"></i>
-         <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Reports</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Analytics</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Export</a>
-            </li>
-          </ul>
+    <!-- A sidebar -->
+    <ng-sidebar [(opened)]="sidebarOpened" [showBackdrop]="true"
+        [closeOnClickBackdrop]="true" [dockedSize]="'34px'" [dock]="true">
+      <div class="card sidebar-back rounded-0">
+        <div class="sidebar-menu bg-secondary rounded-0">
+          <a href="#" [routerLink]="" (click)="toggleSidebar()" ><i class="fa float-right" 
+          [ngClass]="{'fa-arrow-circle-left': sidebarOpened, 'fa-arrow-circle-right': !sidebarOpened}" ></i></a>
         </div>
-      </ng-sidebar>
+        <div class="sidebar-menu-body">
+          <nav class="navbar navbar-full navbar-dark bg-inverse">
+            <ul class="nav nav-pills flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Reports <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Monitor</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </ng-sidebar>
 
-      <!-- Page content -->
-      <div ng-sidebar-content>
+    <!-- Page content -->
+    <div ng-sidebar-content>
+      <div class="container-flow">
         <router-outlet></router-outlet>
       </div>
+    </div>
 
     </ng-sidebar-container>
 

@@ -40,8 +40,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: !environment.production } // <-- debugging purposes only
-    ),
-    TreeviewModule.forRoot()
+    )    
   ],
   providers: [
     AuthService,

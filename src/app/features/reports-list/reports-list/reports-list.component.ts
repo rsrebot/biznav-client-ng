@@ -23,9 +23,7 @@ export class ReportsListComponent implements OnInit {
   }
 
   filterItems() {
-    // if (this.filter && this.filter.length > 3) {
-      this.setTreeItemVisibility(this.items[0], this.filter);
-    // }
+    this.setTreeItemVisibility(this.items[0], this.filter);
   }
 
   private setTreeItemVisibility(item: ITreeItem, filterStr: string): boolean {
