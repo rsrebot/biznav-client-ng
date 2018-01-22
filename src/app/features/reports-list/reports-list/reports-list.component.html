@@ -1,3 +1,20 @@
-<p>
-  reports-list works!
-</p>
+<div *ngIf="level==0" class="input-group">
+  <div class="input-group-prepend" *ngIf="level==0">
+    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+  </div>
+  <input type="text" class="form-control" placeholder="Search..." aria-describedby="basic-addon1" 
+    [(ngModel)]="filter" (keyup)="filterItems()" >
+</div>
+<div *ngFor="let item of items" class="highlight-container box primary">
+  <div class="card card-head rounded-0 p-1 box1" (click)="change(item)" *ngIf="item.visible"  
+    [ngClass]="{'bg-dark': isFolder(item), 'bg-light report-box': !isFolder(item)}" style="margin-top:2px;">
+    <span><i class="fa" [ngClass]="{'fa-folder-o':isFolder(item), 'fa-file-o':!isFolder(item)}"> </i> {{item.text}}</span>
+  </div>
+  <div *ngIf="item.children.length > 0 && !item.collapsed" class="card card-body rounded-0 p-1">
+    <app-reports-list [items]=item.children [level]=level+1></app-reports-list>
+  </div>
+  <div *ngIf="item.children.length === 0 && !item.collapsed" class="card card-body rounded-0 p-1">
+    <span class="text-info">Folder is empty</span>
+  </div>
+</div>
+
