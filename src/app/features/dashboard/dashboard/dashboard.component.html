@@ -1,0 +1,38 @@
+ <app-nav-bar></app-nav-bar> 
+<div class="conatainer-fluid">
+  <div class="row">
+    <!-- <app-left-menu></app-left-menu> -->
+    <ng-sidebar-container style="height: 100vh;">
+
+      <!-- A sidebar -->
+      <ng-sidebar [(opened)]="sidebarOpened">
+        <div class="card sidebar-back">
+         <i class="fa fa-left-arrow"></i>
+         <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Reports</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Analytics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Export</a>
+            </li>
+          </ul>
+        </div>
+      </ng-sidebar>
+
+      <!-- Page content -->
+      <div ng-sidebar-content>
+        <router-outlet></router-outlet>
+      </div>
+
+    </ng-sidebar-container>
+
+  </div>
+</div>
+
+

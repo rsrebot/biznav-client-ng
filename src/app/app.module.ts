@@ -1,21 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
-import { FeaturesModule, LoginComponent, ReportsListComponent } from '@app/features';
+import { FeaturesModule, LoginComponent, ReportsListComponent, DashboardComponent } from '@app/features';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AuthService, AuthInterceptor } from '@app/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginModule } from '@app/features/login';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SidebarModule } from 'ng-sidebar';
 import { RouterModule, Routes } from '@angular/router';
 import { environment } from '@env/environment';
 import { ReportsListModule } from '@app/features/reports-list';
 import { PageNotFoundComponent } from '@app/shared';
+import { TreeviewModule } from 'ngx-treeview';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'reports', component: ReportsListComponent },
+  { path: 'dashboard', component: DashboardComponent, 
+    children: [
+      { path: 'reports', component: ReportsListComponent }
+    ]
+  },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -29,11 +35,13 @@ const appRoutes: Routes = [
     SharedModule,
     FeaturesModule,
     LoginModule,
-    NgbModule.forRoot(),
+    //NgbModule.forRoot(),
+    SidebarModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: !environment.production } // <-- debugging purposes only
-    )
+    ),
+    TreeviewModule.forRoot()
   ],
   providers: [
     AuthService,
