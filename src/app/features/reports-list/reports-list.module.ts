@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReportsListComponent } from './reports-list/reports-list.component';
 import { TreeviewModule } from 'ngx-treeview';
@@ -6,7 +7,8 @@ import { TreeviewModule } from 'ngx-treeview';
 @NgModule({
   imports: [
     CommonModule,
-    TreeviewModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     ReportsListComponent
