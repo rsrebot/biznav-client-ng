@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest} from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
 import {TOKEN_NAME, AuthService} from './auth.service';
 
 
@@ -26,7 +26,11 @@ export class AuthInterceptor implements HttpInterceptor {
         // service.refresh(token);
       }
 
-      req.headers.append(AUTH_HEADER_KEY, `${AUTH_PREFIX} ${token}`);
+      let headers = new HttpHeaders();
+      headers = req.headers.append('Accept', 'application/json');
+      headers = headers.append(AUTH_HEADER_KEY, `${AUTH_PREFIX} ${token}`);
+      
+      req = req.clone({headers: headers});
     }
 
     return next.handle(req);

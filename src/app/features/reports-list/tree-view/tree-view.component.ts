@@ -103,36 +103,36 @@ export class TreeViewComponent implements OnInit {
 
   ngOnInit() {
     if ( this.root === null ) {
-      const item = new TreeItem(1, 'Root', TreeItemType.folder);
+      const item = new TreeItem('1', 'Root', TreeItemType.folder);
       this.root = item;
       this.root.collapsed = false;
       this.root.collapsable = false;
 
-      let child1 =  new TreeItem(3, 'Empty Folder', TreeItemType.folder);
+      let child1 =  new TreeItem('3', 'Empty Folder', TreeItemType.folder);
       child1.collapsed = true;
       item.children.push(child1);
 
-      child1 = new TreeItem(2, 'Folder 1', TreeItemType.folder);
+      child1 = new TreeItem('2', 'Folder 1', TreeItemType.folder);
       child1.collapsed = true;
       item.children.push(child1);
 
-      let rp1 = new TreeItem(4, 'Report 1', TreeItemType.report);
+      let rp1 = new TreeItem('4', 'Report 1', TreeItemType.report);
       child1.children.push(rp1);
-      rp1 = new TreeItem(5, 'Led Zeppelin 2', TreeItemType.report);
+      rp1 = new TreeItem('5', 'Led Zeppelin 2', TreeItemType.report);
       child1.children.push(rp1);
-      rp1 = new TreeItem(6, 'Report 4', TreeItemType.report);
+      rp1 = new TreeItem('6', 'Report 4', TreeItemType.report);
       child1.children.push(rp1);
 
-      const child2 = new TreeItem(7, 'Folder 5', TreeItemType.folder);
+      const child2 = new TreeItem('7', 'Folder 5', TreeItemType.folder);
       child1.children.push(child2);
 
-      rp1 = new TreeItem(7, 'Report 5', TreeItemType.report);
+      rp1 = new TreeItem('7', 'Report 5', TreeItemType.report);
       child2.children.push(rp1);
 
-      rp1 = new TreeItem(8, 'Rolling Stones 6', TreeItemType.report);
+      rp1 = new TreeItem('8', 'Rolling Stones 6', TreeItemType.report);
       child2.children.push(rp1);
 
-      rp1 = new TreeItem(9, 'Report 7', TreeItemType.report);
+      rp1 = new TreeItem('9', 'Report 7', TreeItemType.report);
       child2.children.push(rp1);
     }
   }
@@ -140,7 +140,7 @@ export class TreeViewComponent implements OnInit {
 }
 
 export interface ITreeItem {
-  id: number;
+  id: string;
   text: string;
   type: TreeItemType;
   collapsed: boolean;
@@ -153,7 +153,7 @@ export interface ITreeItem {
 
 export class TreeItem implements ITreeItem {
 
-  constructor(public id: number, public text: string, public type: TreeItemType) {
+  constructor(public id: string, public text: string, public type: TreeItemType) {
     this.children = new Array<ITreeItem>();
   }
 

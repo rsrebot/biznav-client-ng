@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ReportsService, IReportTreeNode } from "@app/core";
+import 'rxjs/add/operator/map'
+import { ITreeItem, TreeItemType, TreeItem } from "@app/features/reports-list/tree-view/tree-view.component";
 
 @Component({
   selector: 'app-reports-list',
@@ -10,8 +13,9 @@ export class ReportsListComponent implements OnInit {
   @Input() root: ITreeItem = null;
 
   filter = '';
+  loading = false;
 
-  constructor() { }
+  constructor(private reportsService: ReportsService) { }
 
   isFolder(item: ITreeItem) {
     return item.type === TreeItemType.folder;
@@ -22,33 +26,19 @@ export class ReportsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
+    this.reportsService.getReportsTree().subscribe( data => {
+      this.loading = false;
+      this.root = this.mapDataToTreeItem(data);
+    });
   }
 
-}
+  private mapDataToTreeItem(data: IReportTreeNode): ITreeItem {
+    let item =  new TreeItem(data.id, data.text, 
+        data.type === 'Folder' ? TreeItemType.folder : TreeItemType.report);
 
-export interface ITreeItem {
-  id: number;
-  text: string;
-  type: TreeItemType;
-  collapsed: boolean;
-  visible: boolean;
-  children: ITreeItem[];
-  selected: boolean;
-}
+    item.children = data.children.map(child => this.mapDataToTreeItem(child));
 
-export class TreeItem implements ITreeItem {
-
-  constructor(public id: number, public text: string, public type: TreeItemType) {
-    this.children = new Array<ITreeItem>();
+    return item;
   }
-
-  collapsed = true;
-  visible = true;
-  selected = false;
-  children: ITreeItem[];
-}
-
-export enum TreeItemType {
-  folder,
-  report
 }

@@ -7,8 +7,10 @@ import { FeaturesModule,
           DashboardComponent, 
           ReportDetailsComponent } from '@app/features';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import  {HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
-import { AuthService, AuthInterceptor } from '@app/core';
+import { AuthService, AuthInterceptor, ReportsService } from '@app/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginModule } from '@app/features/login';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -37,11 +39,13 @@ const appRoutes: Routes = [
     AppComponent
   ],
   imports: [
+    HttpModule,
     BrowserModule,
     CoreModule,
     SharedModule,
     FeaturesModule,
     LoginModule,
+    HttpClientModule,
     //NgbModule.forRoot(),
     SidebarModule.forRoot(),
     BsDropdownModule.forRoot(),
@@ -52,6 +56,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     AuthService,
+    ReportsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
