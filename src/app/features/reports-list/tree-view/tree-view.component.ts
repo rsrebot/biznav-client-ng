@@ -21,8 +21,10 @@ export class TreeViewComponent implements OnInit {
     return item ? item.type === TreeItemType.folder : false;
   }
 
-  change(item: ITreeItem) {
-    item.collapsed = !item.collapsed;
+  changeCollapsedState(item: ITreeItem) {
+    if (item.collapsable) { 
+      item.collapsed = !item.collapsed;
+    }
   }
 
   isFiltered(): boolean {
@@ -55,7 +57,8 @@ export class TreeViewComponent implements OnInit {
 
   showEmptyBody(item: ITreeItem): boolean {
     if (item) {
-      return item.children.length === 0
+      return item.children.length < 1
+            && item.type === TreeItemType.folder
             && item.visible
             && !this.isBodyVisible(item)
             && ((!item.collapsed && !this.isFiltered())
@@ -97,6 +100,8 @@ export class TreeViewComponent implements OnInit {
     if ( this.root === null ) {
       const item = new TreeItem(1, 'Root', TreeItemType.folder);
       this.root = item;
+      this.root.collapsed = false;
+      this.root.collapsable = false;
 
       let child1 =  new TreeItem(3, 'Empty Folder', TreeItemType.folder);
       child1.collapsed = true;
@@ -138,6 +143,7 @@ export interface ITreeItem {
   filtered: boolean;
   children: ITreeItem[];
   selected: boolean;
+  collapsable: boolean;
 }
 
 export class TreeItem implements ITreeItem {
@@ -151,6 +157,7 @@ export class TreeItem implements ITreeItem {
   selected = false;
   children: ITreeItem[];
   filtered = false;
+  collapsable = true;
 }
 
 export enum TreeItemType {

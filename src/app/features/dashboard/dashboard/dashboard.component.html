@@ -27,9 +27,13 @@
     </ng-sidebar>
 
     <!-- Page content -->
-    <div ng-sidebar-content>
-      <div class="container-flow">
-        <router-outlet></router-outlet>
+    <div ng-sidebar-content class="h-100">
+      <div class="card card-body bg-light rounded-0">
+        <div class="card card-body rounded-0 m-1">
+        </div>
+        <div class="card card-body rounded-0 m-1">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
 

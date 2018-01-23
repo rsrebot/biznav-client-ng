@@ -1,5 +1,5 @@
 <div  class="highlight-container box primary">
-  <div class="card card-head rounded-0 p-1 box1 text-secondary" (click)="change(root)" *ngIf="isHeaderVisible(root)"  
+  <div class="card card-head rounded-0 p-1 box1 text-secondary" (click)="changeCollapsedState(root)" *ngIf="isHeaderVisible(root)"  
     [ngClass]="{'bg-primary': isFolder(root), 'bg-light report-box': !isFolder(root)}" style="margin-top:2px;">
     <span><i class="fa" [ngClass]="{'fa-folder-o':isFolder(root), 'fa-file-o':!isFolder(root)}"> </i> {{root.text}}</span>
   </div>
