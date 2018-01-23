@@ -2,7 +2,7 @@
   <div class="input-group-prepend">
     <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
   </div>
-  <input type="text" class="form-control" placeholder="Search..." aria-describedby="basic-addon1" 
+  <input type="text" class="form-control" placeholder="Start typing part of the name of a report to filter..." aria-describedby="basic-addon1" 
     [(ngModel)]="filter">
 </div>
 <app-tree-view [root]="root" [filter]="filter"></app-tree-view>

@@ -9,7 +9,7 @@ import { SidebarContainer, Sidebar } from 'ng-sidebar';
 })
 export class DashboardComponent implements OnInit {
 
-  sidebarOpened: boolean = true;
+  sidebarOpened = false;
 
   toggleSidebar() {
     this.sidebarOpened = !this.sidebarOpened;

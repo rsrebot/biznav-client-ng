@@ -10,13 +10,13 @@ export class TreeViewComponent implements OnInit {
   @Input() root: ITreeItem = null;
   @Input() level = 0;
   _filter = '';
- 
+
   @Input()
   public set filter(val: string) {
     this._filter = val;
     this.filterItems();
   }
-    
+
   isFolder(item: ITreeItem) {
     return item ? item.type === TreeItemType.folder : false;
   }
@@ -25,13 +25,18 @@ export class TreeViewComponent implements OnInit {
     item.collapsed = !item.collapsed;
   }
 
+  isFiltered(): boolean {
+    return this._filter && this._filter.length > 0;
+  }
+
   filterItems() {
     this.setTreeItemVisibility(this.root, this._filter);
   }
 
   isHeaderVisible(item: ITreeItem): boolean {
     if (item) {
-      return item.visible;
+      return item.visible &&
+        ((this.isFiltered() && item.filtered) || !this.isFiltered());
     } else {
       return false;
     }
@@ -39,9 +44,10 @@ export class TreeViewComponent implements OnInit {
 
   isBodyVisible(item: ITreeItem): boolean {
     if (item) {
-      return item.children.length > 0  
+      return item.children.length > 0
             && item.visible
-            && (!item.collapsed || item.filtered);
+            && ((!item.collapsed && !this.isFiltered())
+                 || (this.isFiltered() && item.filtered));
     } else {
       return false;
     }
@@ -49,9 +55,9 @@ export class TreeViewComponent implements OnInit {
 
   showEmptyBody(item: ITreeItem): boolean {
     if (item) {
-      return item.children.length === 0 
+      return item.children.length === 0
             && item.visible
-            && (!item.collapsed || item.filtered);
+            && !item.collapsed;
     } else {
       return false;
     }
@@ -61,13 +67,16 @@ export class TreeViewComponent implements OnInit {
     if (!item) {
       return;
     }
-    
+
     let filtered = true;
-    
-    if (!filterStr || filterStr.length < 1) {
+
+    if (!this.isFiltered()) {
       filtered = false;
     } else {
-      if (!item.text.toLowerCase().includes(filterStr.toLocaleLowerCase(), 0)) {
+      if (!item.text.toLowerCase().includes(filterStr.toLocaleLowerCase())) {
+        filtered = false;
+      }
+      if (item.type === TreeItemType.folder) {
         filtered = false;
       }
     }
@@ -76,8 +85,6 @@ export class TreeViewComponent implements OnInit {
       filtered = filtered || this.setTreeItemVisibility(element, filterStr);
     });
 
-    //item.visible = visible;
-    //item.collapsed = !visible;
     item.filtered = filtered;
     return filtered;
   }
@@ -99,7 +106,7 @@ export class TreeViewComponent implements OnInit {
 
       let rp1 = new TreeItem(4, 'Report 1', TreeItemType.report);
       child1.children.push(rp1);
-      rp1 = new TreeItem(5, 'Report 2', TreeItemType.report);
+      rp1 = new TreeItem(5, 'Led Zeppelin 2', TreeItemType.report);
       child1.children.push(rp1);
       rp1 = new TreeItem(6, 'Report 4', TreeItemType.report);
       child1.children.push(rp1);
@@ -110,7 +117,7 @@ export class TreeViewComponent implements OnInit {
       rp1 = new TreeItem(7, 'Report 5', TreeItemType.report);
       child2.children.push(rp1);
 
-      rp1 = new TreeItem(8, 'Report 6', TreeItemType.report);
+      rp1 = new TreeItem(8, 'Rolling Stones 6', TreeItemType.report);
       child2.children.push(rp1);
 
       rp1 = new TreeItem(9, 'Report 7', TreeItemType.report);
