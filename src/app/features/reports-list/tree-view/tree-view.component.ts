@@ -57,7 +57,9 @@ export class TreeViewComponent implements OnInit {
     if (item) {
       return item.children.length === 0
             && item.visible
-            && !item.collapsed;
+            && !this.isBodyVisible(item)
+            && ((!item.collapsed && !this.isFiltered())
+                 || (this.isFiltered() && item.filtered));
     } else {
       return false;
     }

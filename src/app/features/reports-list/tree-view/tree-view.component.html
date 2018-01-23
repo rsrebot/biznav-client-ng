@@ -1,11 +1,12 @@
 <div  class="highlight-container box primary">
-  <div class="card card-head rounded-0 p-1 box1" (click)="change(root)" *ngIf="isHeaderVisible(root)"  
-    [ngClass]="{'bg-dark': isFolder(root), 'bg-light report-box': !isFolder(root)}" style="margin-top:2px;">
+  <div class="card card-head rounded-0 p-1 box1 text-secondary" (click)="change(root)" *ngIf="isHeaderVisible(root)"  
+    [ngClass]="{'bg-primary': isFolder(root), 'bg-light report-box': !isFolder(root)}" style="margin-top:2px;">
     <span><i class="fa" [ngClass]="{'fa-folder-o':isFolder(root), 'fa-file-o':!isFolder(root)}"> </i> {{root.text}}</span>
   </div>
   <div *ngIf="isBodyVisible(root)" class="card card-body rounded-0 p-1">
-  <div *ngFor="let item of root.children">
-    <app-tree-view [root]="item" [level]=level+1 [filter]="_filter"></app-tree-view>
+    <div *ngFor="let item of root.children">
+      <app-tree-view [root]="item" [level]=level+1 [filter]="_filter"></app-tree-view>
+    </div>
   </div>
   <div *ngIf="showEmptyBody(root)" class="card card-body rounded-0 p-1">
     <span class="text-info">Folder is empty</span>
