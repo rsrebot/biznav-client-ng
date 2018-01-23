@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-tree-view',
@@ -68,6 +69,10 @@ export class TreeViewComponent implements OnInit {
     }
   }
 
+  reportSelected(item: ITreeItem) {
+    this.router.navigateByUrl('dashboard/reports/' + item.id);
+  }
+
   private setTreeItemVisibility(item: ITreeItem, filterStr: string): boolean {
     if (!item) {
       return;
@@ -94,7 +99,7 @@ export class TreeViewComponent implements OnInit {
     return filtered;
   }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     if ( this.root === null ) {

@@ -4,16 +4,19 @@ import { CommonModule } from '@angular/common';
 import { ReportsListComponent } from './reports-list/reports-list.component';
 import { TreeviewModule } from 'ngx-treeview';
 import { TreeViewComponent } from './tree-view/tree-view.component';
+import { TreeViewActionsComponent } from './tree-view-actions/tree-view-actions.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BsDropdownModule
   ],
   exports: [
     ReportsListComponent
   ],
-  declarations: [ReportsListComponent, TreeViewComponent]
+  declarations: [ReportsListComponent, TreeViewComponent, TreeViewActionsComponent]
 })
 export class ReportsListModule { }

@@ -1,7 +1,17 @@
 <div  class="highlight-container box primary">
-  <div class="card card-head rounded-0 p-1 box1 text-secondary" (click)="changeCollapsedState(root)" *ngIf="isHeaderVisible(root)"  
+  <div class="card card-head rounded-0 p-1 box1 text-secondary" *ngIf="isHeaderVisible(root)"  
     [ngClass]="{'bg-primary': isFolder(root), 'bg-light report-box': !isFolder(root)}" style="margin-top:2px;">
-    <span><i class="fa" [ngClass]="{'fa-folder-o':isFolder(root), 'fa-file-o':!isFolder(root)}"> </i> {{root.text}}</span>
+    <div class="row">
+      <div class="col-9" (click)="changeCollapsedState(root)" *ngIf="isFolder(root)">
+        <span><i class="fa" [ngClass]="{'fa-folder-o': root.collapsed, 'fa-folder-open-o': !root.collapsed }"> </i> {{root.text}}</span>
+      </div>
+      <div class="col-9" (click)="reportSelected(root)" *ngIf="!isFolder(root)">
+        <span><i class="fa fa-file-o"> </i> {{root.text}}</span>
+      </div>
+      <div class="col-3">
+        <app-tree-view-actions></app-tree-view-actions>
+      </div>
+    </div>
   </div>
   <div *ngIf="isBodyVisible(root)" class="card card-body rounded-0 p-1">
     <div *ngFor="let item of root.children">
