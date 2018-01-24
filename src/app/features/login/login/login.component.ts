@@ -27,10 +27,8 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl("dashboard/reports").then(value => {
         this.loading = false;
       });
-      //this.loading = false;
     }).catch(reason => {
-      // alert(reason);
-
+  
     });
   }
 

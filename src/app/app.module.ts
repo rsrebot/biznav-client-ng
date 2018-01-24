@@ -21,9 +21,10 @@ import { ReportsListModule } from '@app/features/reports-list';
 import { PageNotFoundComponent } from '@app/shared';
 import { MessageBus } from 'ngx-message-bus';
 import { BsDropdownModule } from 'ngx-bootstrap';
-import { LoadingModule } from 'ngx-loading'; 
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading'; 
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, 
     children: [
@@ -46,7 +47,12 @@ const appRoutes: Routes = [
     SharedModule,
     FeaturesModule,
     LoginModule,
-    LoadingModule,
+    LoadingModule.forRoot({
+        animationType: ANIMATION_TYPES.threeBounce,
+        primaryColour: '#003058', 
+        secondaryColour: '#00a7e1', 
+        tertiaryColour: '#ffffff'
+    }),
     HttpClientModule,
     //NgbModule.forRoot(),
     SidebarModule.forRoot(),

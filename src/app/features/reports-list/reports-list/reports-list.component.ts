@@ -33,6 +33,8 @@ export class ReportsListComponent implements OnInit {
       this.loading = false;
       //this.spinner.hide();
       this.root = this.mapDataToTreeItem(data);
+      this.root.collapsable = false;
+      this.root.collapsed = false;
     });
   }
 
