@@ -28,10 +28,9 @@ export class ReportsListComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    //this.spinner.show();
+    
     this.reportsService.getReportsTree().subscribe( data => {
       this.loading = false;
-      //this.spinner.hide();
       this.root = this.mapDataToTreeItem(data);
       this.root.collapsable = false;
       this.root.collapsed = false;
@@ -42,7 +41,17 @@ export class ReportsListComponent implements OnInit {
     let item =  new TreeItem(data.id, data.text, 
         data.type.toLowerCase() === 'folder' ? TreeItemType.folder : TreeItemType.report);
 
-    item.children = data.children.map(child => this.mapDataToTreeItem(child));
+    item.children = data.children.sort((first, second) => {
+      const firstTxt = first.text == null ? null : first.text.toLowerCase();
+      const secondTxt = second.text == null ? null : second.text.toLowerCase();
+
+      if (firstTxt == secondTxt)  
+        return 0;  
+      if (firstTxt < secondTxt)  
+        return -1;  
+      else  
+          return 1; 
+    }).map(child => this.mapDataToTreeItem(child));
 
     return item;
   }
