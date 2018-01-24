@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '@app/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { AuthService } from '@app/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   showInvalidCredentialsAlert = false;
   loginForm: FormGroup;
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.authService.login(this.userName, this.password).then(resp => {
-      alert(resp);
+      this.router.navigateByUrl("dashboard/reports");
     }).catch(reason => {
       // alert(reason);
 
