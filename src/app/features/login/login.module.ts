@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CoreModule } from '@app/core';
 import { HttpModule } from '@angular/http';
+import { LoadingModule } from 'ngx-loading';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { HttpModule } from '@angular/http';
     CoreModule,
     NgbModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    LoadingModule
   ],
   exports: [
     LoginComponent

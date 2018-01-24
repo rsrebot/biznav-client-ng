@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) { }
 
+
+  loading = false;
   showInvalidCredentialsAlert = false;
   loginForm: FormGroup;
   submitted = false;
@@ -20,8 +22,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.loading = true;
     this.authService.login(this.userName, this.password).then(resp => {
-      this.router.navigateByUrl("dashboard/reports");
+      this.router.navigateByUrl("dashboard/reports").then(value => {
+        this.loading = false;
+      });
+      //this.loading = false;
     }).catch(reason => {
       // alert(reason);
 

@@ -21,6 +21,7 @@ import { ReportsListModule } from '@app/features/reports-list';
 import { PageNotFoundComponent } from '@app/shared';
 import { MessageBus } from 'ngx-message-bus';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { LoadingModule } from 'ngx-loading'; 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
     SharedModule,
     FeaturesModule,
     LoginModule,
+    LoadingModule,
     HttpClientModule,
     //NgbModule.forRoot(),
     SidebarModule.forRoot(),

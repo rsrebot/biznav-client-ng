@@ -5,4 +5,7 @@
   <input type="text" class="form-control" placeholder="Start typing part of the name of a report to filter..." aria-describedby="basic-addon1" 
     [(ngModel)]="filter">
 </div>
-<app-tree-view [root]="root" [filter]="filter"></app-tree-view>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
+
+<app-tree-view *ngIf="!loading" [root]="root" [filter]="filter"></app-tree-view>

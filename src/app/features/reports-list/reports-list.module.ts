@@ -6,13 +6,15 @@ import { TreeviewModule } from 'ngx-treeview';
 import { TreeViewComponent } from './tree-view/tree-view.component';
 import { TreeViewActionsComponent } from './tree-view-actions/tree-view-actions.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { LoadingModule } from 'ngx-loading';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BsDropdownModule
+    BsDropdownModule,
+    LoadingModule
   ],
   exports: [
     ReportsListComponent

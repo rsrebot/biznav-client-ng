@@ -1,3 +1,5 @@
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
+
     <ngb-alert [dismissible]="true" *ngIf="showInvalidCredentialsAlert" (close)="closeInvalidCredentialsAlert">
       Invalid credentials.
     </ngb-alert>
