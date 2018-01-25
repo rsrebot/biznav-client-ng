@@ -3,9 +3,9 @@
     <span class="input-group-text rounded-0" id="basic-addon1"><i class="fa fa-search"></i></span>
   </div>
   <input type="text" class="rounded-0 form-control" placeholder="Start typing part of the name of a report to filter..." aria-describedby="basic-addon1" 
-    [(ngModel)]="filter">
+    (ngModelChange) = "updateFilter($event)" [ngModel]="filter"/>
 </div>
 
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
 
-<app-tree-view *ngIf="!loading" [root]="root" [filter]="filter"></app-tree-view>
+<app-tree-view *ngIf="!loading" [root]="root" [filter]="_filter"></app-tree-view>

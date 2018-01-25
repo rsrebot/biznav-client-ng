@@ -24,6 +24,8 @@ export class ReportsService {
       id: item.objID,
       text: item.displayName,
       type: item.objType,
+      version: item.version,
+      status: item.status,
       children: item.items.map(childItem => this.treeParser(childItem))
     }
   }
@@ -33,5 +35,7 @@ export interface IReportTreeNode {
   id: string,
   text: string,
   type: string,
+  version: number,
+  status: string,
   children: IReportTreeNode[]
 } 

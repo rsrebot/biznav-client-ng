@@ -1,10 +1,12 @@
 <div class="float-right">
   <div class="btn-group" dropdown placement="bottom left">
     <a dropdownToggle class="btn btn-sm btn-primary dropdownToggle text-dark pt-0 pd-0">
-      <i class="fa fa-caret-down"></i>
+      <i class="fa fa-bars"></i>
     </a>
     <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
-      <li role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-remove"></i> Delete</a></li>
+      <li *ngIf="isReprot()" role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-calendar"></i> Schedule</a></li>
+      <li *ngIf="isReprot()" role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-edit"></i> Edit</a></li>
+      <li *ngIf="isReprot() || isFolder()" role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-remove"></i> Delete</a></li>
     </ul>
   </div>
 </div>

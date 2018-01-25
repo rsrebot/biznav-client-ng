@@ -1,10 +1,26 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
+import { trigger, style, animate, transition  } from '@angular/animations';
+import { Subject } from "rxjs/Subject";
 
 @Component({
-  selector: 'app-tree-view',
+  selector: 'app-tree-view',  
   templateUrl: './tree-view.component.html',
-  styleUrls: ['./tree-view.component.scss']
+  styleUrls: ['./tree-view.component.scss'],
+  animations: [
+    trigger(
+      'enterAnimation', [
+        transition(':enter', [
+          style({transform: 'translateX(100%)', opacity: 0}),
+          animate('250ms', style({transform: 'translateX(0)', opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({transform: 'translateX(0)', opacity: 1}),
+          animate('250ms', style({transform: 'translateX(100%)', opacity: 0}))
+        ])
+      ]
+    )
+  ],
 })
 export class TreeViewComponent implements OnInit {
 
@@ -22,8 +38,14 @@ export class TreeViewComponent implements OnInit {
     return item ? item.type === TreeItemType.folder : false;
   }
 
+  isLatestVersion(item: ITreeItem) {
+    // TODO: we should have a isLatest property coming form the back
+    return this.isFolder(item) 
+          || item.status == 'RDY';
+  }
+
   changeCollapsedState(item: ITreeItem) {
-    if (item.collapsable) { 
+    if (item.collapsable && !item.filtered) { 
       item.collapsed = !item.collapsed;
     }
   }
@@ -102,39 +124,9 @@ export class TreeViewComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    if ( this.root === null ) {
-      const item = new TreeItem('1', 'Root', TreeItemType.folder);
-      this.root = item;
-      this.root.collapsed = false;
-      this.root.collapsable = false;
+  }
 
-      let child1 =  new TreeItem('3', 'Empty Folder', TreeItemType.folder);
-      child1.collapsed = true;
-      item.children.push(child1);
-
-      child1 = new TreeItem('2', 'Folder 1', TreeItemType.folder);
-      child1.collapsed = true;
-      item.children.push(child1);
-
-      let rp1 = new TreeItem('4', 'Report 1', TreeItemType.report);
-      child1.children.push(rp1);
-      rp1 = new TreeItem('5', 'Led Zeppelin 2', TreeItemType.report);
-      child1.children.push(rp1);
-      rp1 = new TreeItem('6', 'Report 4', TreeItemType.report);
-      child1.children.push(rp1);
-
-      const child2 = new TreeItem('7', 'Folder 5', TreeItemType.folder);
-      child1.children.push(child2);
-
-      rp1 = new TreeItem('7', 'Report 5', TreeItemType.report);
-      child2.children.push(rp1);
-
-      rp1 = new TreeItem('8', 'Rolling Stones 6', TreeItemType.report);
-      child2.children.push(rp1);
-
-      rp1 = new TreeItem('9', 'Report 7', TreeItemType.report);
-      child2.children.push(rp1);
-    }
+  ngOnDestroy() {
   }
 
 }
@@ -149,6 +141,10 @@ export interface ITreeItem {
   children: ITreeItem[];
   selected: boolean;
   collapsable: boolean;
+  showActions: boolean;
+  showVersion: boolean;
+  version: number,
+  status: string
 }
 
 export class TreeItem implements ITreeItem {
@@ -163,6 +159,10 @@ export class TreeItem implements ITreeItem {
   children: ITreeItem[];
   filtered = false;
   collapsable = true;
+  showActions = true;
+  showVersion = true;
+  version = 0;
+  status = null;
 }
 
 export enum TreeItemType {

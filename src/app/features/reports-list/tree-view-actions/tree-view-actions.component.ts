@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ITreeItem, TreeItemType } from "@app/features/reports-list/tree-view/tree-view.component";
 
 @Component({
   selector: 'app-tree-view-actions',
@@ -6,6 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tree-view-actions.component.scss']
 })
 export class TreeViewActionsComponent implements OnInit {
+
+  @Input()
+  item: ITreeItem;
+
+  isFolder(): boolean {
+    return this.item ? this.item.type === TreeItemType.folder : false;
+  }
+
+  isReprot(): boolean {
+    return this.item ? this.item.type === TreeItemType.report : false;
+  }
 
   constructor() { }
 
