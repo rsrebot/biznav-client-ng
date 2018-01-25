@@ -22,6 +22,7 @@ import { PageNotFoundComponent } from '@app/shared';
 import { MessageBus } from 'ngx-message-bus';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading'; 
+import { ToastrModule } from 'ngx-toastr';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -60,7 +61,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: !environment.production } // <-- debugging purposes only
-    )    
+    ),
+    ToastrModule.forRoot()    
   ],
   providers: [
     AuthService,

@@ -3,6 +3,7 @@ import { ReportsService, IReportTreeNode } from "@app/core";
 import 'rxjs/add/operator/map'
 import { ITreeItem, TreeItemType, TreeItem } from "@app/features/reports-list/tree-view/tree-view.component";
 import { Subject } from "rxjs/Subject";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reports-list',
@@ -16,15 +17,14 @@ export class ReportsListComponent implements OnInit {
   filter = '';
   _filter = '';
   loading = false;
-
   filterSubject = new Subject();
-  
+ 
+  constructor(private reportsService: ReportsService, private toastr: ToastrService) { }
+
   updateFilter(event: any) {
     this.filter = event;
     this.filterSubject.next(event);
   }
-
-  constructor(private reportsService: ReportsService) { }
 
   isFolder(item: ITreeItem) {
     return item.type === TreeItemType.folder;
@@ -49,6 +49,8 @@ export class ReportsListComponent implements OnInit {
       this.root.showActions = false
       this.root.showVersion = false;
       this.root.text = 'Reports';
+    }, error => {
+      this.toastr.error(error);
     });
   }
 
