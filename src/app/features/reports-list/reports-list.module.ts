@@ -8,6 +8,7 @@ import { TreeViewActionsComponent } from './tree-view-actions/tree-view-actions.
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { LoadingModule } from 'ngx-loading';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     BsDropdownModule,
     LoadingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule
   ],
   exports: [
     ReportsListComponent

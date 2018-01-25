@@ -50,7 +50,7 @@ export class ReportsListComponent implements OnInit {
       this.root.showVersion = false;
       this.root.text = 'Reports';
     }, error => {
-      this.toastr.error(error);
+      this.toastr.error('There was an error retrieving the reports data. ' + JSON.stringify(error));
     });
   }
 

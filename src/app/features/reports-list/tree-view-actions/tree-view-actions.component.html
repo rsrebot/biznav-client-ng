@@ -4,8 +4,8 @@
       <i class="fa fa-bars"></i>
     </a>
     <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
-      <li *ngIf="isReprot()" role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-calendar"></i> Schedule</a></li>
-      <li *ngIf="isReprot()" role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-edit"></i> Edit</a></li>
+      <li *ngIf="isReprot()" role="menuitem"><a [routerLink]="['/dashboard', 'reports', item.id]" class="dropdown-item"><i class="fa fa-calendar"></i> Schedule</a></li>
+      <li *ngIf="isReprot()" role="menuitem"><a [routerLink]="['/dashboard']" class="dropdown-item"><i class="fa fa-edit"></i> Edit</a></li>
       <li *ngIf="isReprot() || isFolder()" role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-remove"></i> Delete</a></li>
     </ul>
   </div>
