@@ -12,7 +12,7 @@ export class ReportsService {
   constructor(private http: HttpClient) { }
 
   getReportsTree(): Observable<IReportTreeNode> {
-    let apiURL = this.url + '/rest/root';
+    let apiURL = this.url + '/rest/root?showAllVersions=false';
     return this.http.get(apiURL) 
       .map(res => { 
         return this.treeParser(res);

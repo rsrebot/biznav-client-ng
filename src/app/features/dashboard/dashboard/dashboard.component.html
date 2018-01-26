@@ -1,7 +1,7 @@
  <app-nav-bar></app-nav-bar> 
 <div class="conatainer-fluid">
   <div class="row">
-    <ng-sidebar-container style="height: 100vh;">
+    <ng-sidebar-container style="height: calc(100vh - 72px);">
 
     <!-- A sidebar -->
     <ng-sidebar [(opened)]="sidebarOpened" [showBackdrop]="false"
@@ -31,7 +31,7 @@
       <div class="card card-body bg-light rounded-0">
         <div class="card card-body rounded-0 m-1">
         </div>
-        <div class="card card-body rounded-0 m-1">
+        <div class="card card-body rounded-0 m-1 h-100">
           <router-outlet></router-outlet>
         </div>
       </div>
