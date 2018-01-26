@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReportsService } from "@app/core";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-report-details',

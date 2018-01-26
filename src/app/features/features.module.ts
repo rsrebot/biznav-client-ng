@@ -4,6 +4,7 @@ import { LoginModule } from './login/login.module';
 import { ReportsListModule } from './reports-list';
 import { DashboardModule } from './dashboard';
 import { ReportDetailsModule } from './report-details';
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { ReportDetailsModule } from './report-details';
     LoginModule,
     ReportsListModule,
     DashboardModule,
-    ReportDetailsModule
+    ReportDetailsModule,
+    RouterModule
   ],
   exports: [],
   declarations: []
