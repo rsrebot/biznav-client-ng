@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '@app/core';
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +12,7 @@ import { Router } from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
-
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) { }
 
   loading = false;
   showInvalidCredentialsAlert = false;
@@ -24,11 +25,12 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     this.loading = true;
     this.authService.login(this.userName, this.password).then(resp => {
-      this.router.navigateByUrl("dashboard/reports").then(value => {
+        this.router.navigateByUrl('dashboard/reports').then(value => {
+          this.loading = false;
+        });
+      }).catch(reason => {
         this.loading = false;
-      });
-    }).catch(reason => {
-  
+        this.toastr.error('Invalid user name or password');
     });
   }
 

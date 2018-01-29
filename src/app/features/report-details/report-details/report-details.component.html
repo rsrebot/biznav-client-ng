@@ -1,6 +1,11 @@
-<div class="card card-header">
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
+<div class="card card-header rounded-0">
   <div class="row">
-    <div class="col-2 offset-10">
+    <div class="col-10">
+      <h4 *ngIf="reportDefinition">{{reportDefinition.caption}}</h4>
+      <h4 *ngIf="!reportDefinition">New Report</h4>
+    </div>
+    <div class="col-2">
       <div class="btn-group pull-right">
         <button class="btn btn-primary btn-sm" [routerLink]="['../dashboard/reports']"><i class="fa fa-arrow-left"></i></button>
       </div>
@@ -8,5 +13,21 @@
   </div>
 </div>
 <div class="card rounded-0 card-body">
-  Details
+  <tabset>
+    <tab heading="General" id="rpt-general">
+      <app-general-info [reportDefinition]="reportDefinition"></app-general-info>
+    </tab>
+    <tab heading="Columns" id="rpt-cols">
+      <app-columns [reportDefinition]="reportDefinition"></app-columns>
+    </tab>
+    <tab heading="Parameters" id="rpt-params">
+      <app-parameters [reportDefinition]="reportDefinition"></app-parameters>
+    </tab>
+    <tab heading="Query" id="rpt-query">
+      <app-query-editor [reportDefinition]="reportDefinition"></app-query-editor>
+    </tab>
+    <tab heading="Security" id="rpt-params">
+      <app-security [reportDefinition]="reportDefinition"></app-security>
+    </tab>
+  </tabset>
 </div>

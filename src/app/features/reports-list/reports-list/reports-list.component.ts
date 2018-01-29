@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ReportsService, IReportTreeNode } from "@app/core";
+import { ReportsService, IReportTreeNode } from '@app/core';
 import 'rxjs/add/operator/map'
-import { ITreeItem, TreeItemType, TreeItem } from "@app/features/reports-list/tree-view/tree-view.component";
-import { Subject } from "rxjs/Subject";
+import { ITreeItem, TreeItemType, TreeItem } from '@app/features/reports-list/tree-view/tree-view.component';
+import { Subject } from 'rxjs/Subject';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -18,7 +18,7 @@ export class ReportsListComponent implements OnInit {
   _filter = '';
   loading = false;
   filterSubject = new Subject();
- 
+
   constructor(private reportsService: ReportsService, private toastr: ToastrService) { }
 
   updateFilter(event: any) {
@@ -40,7 +40,7 @@ export class ReportsListComponent implements OnInit {
     });
 
     this.loading = true;
-    
+
     this.reportsService.getReportsTree().subscribe( data => {
       this.loading = false;
       this.root = this.mapDataToTreeItem(data);

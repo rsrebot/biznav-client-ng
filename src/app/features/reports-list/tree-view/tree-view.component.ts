@@ -22,7 +22,7 @@ import { Subject } from "rxjs/Subject";
     )
   ],
 })
-export class TreeViewComponent implements OnInit {
+export class TreeViewComponent implements OnInit, OnDestroy {
 
   @Input() root: ITreeItem = null;
   @Input() level = 0;

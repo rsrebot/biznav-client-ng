@@ -8,20 +8,19 @@ import { FeaturesModule,
           ReportDetailsComponent } from '@app/features';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import  {HttpClientModule } from '@angular/common/http'
+import {HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { AuthService, AuthInterceptor, ReportsService } from '@app/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginModule } from '@app/features/login';
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SidebarModule } from 'ng-sidebar';
 import { RouterModule, Routes } from '@angular/router';
 import { environment } from '@env/environment';
 import { ReportsListModule } from '@app/features/reports-list';
 import { PageNotFoundComponent } from '@app/shared';
 import { MessageBus } from 'ngx-message-bus';
-import { BsDropdownModule } from 'ngx-bootstrap';
-import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading'; 
+import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
 
 const appRoutes: Routes = [
@@ -50,19 +49,19 @@ const appRoutes: Routes = [
     LoginModule,
     LoadingModule.forRoot({
         animationType: ANIMATION_TYPES.threeBounce,
-        primaryColour: '#003058', 
-        secondaryColour: '#00a7e1', 
+        primaryColour: '#003058',
+        secondaryColour: '#00a7e1',
         tertiaryColour: '#ffffff'
     }),
     HttpClientModule,
-    //NgbModule.forRoot(),
     SidebarModule.forRoot(),
     BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: !environment.production } // <-- debugging purposes only
     ),
-    ToastrModule.forRoot()    
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthService,
