@@ -1,7 +1,11 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ReportsService, QueryDefViewModel } from '@app/core';
+import { ReportsService, QueryDefViewModel, ReferenceDataService } from '@app/core';
 import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/concat';
+import 'rxjs/add/operator/combineAll';
+import 'rxjs/add/observable/of';
 
 @Component({
   selector: 'app-report-details',
@@ -14,26 +18,30 @@ export class ReportDetailsComponent implements OnInit, OnDestroy {
   id: number;
 
   @Input()
-  editMode = false;
+  editable = true;
 
   loading = false;
 
   reportDefinition: QueryDefViewModel;
 
+  availableConnections: string[];
+
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private reportsService: ReportsService) { }
+  constructor(private route: ActivatedRoute, private reportsService: ReportsService, private referenceDataService: ReferenceDataService) { }
 
   ngOnInit() {
-     this.sub = this.route.params.subscribe(params => {
-       this.id = +params['id']; // (+) converts string 'id' to a number
+    this.sub = this.route.params.subscribe(params => {
+      this.id = +params['id']; // (+) converts string 'id' to a number
 
-       // dispatch action to load the details here.
       this.loading = true;
-      this.reportsService.getReportDefinition(this.id.toString()).subscribe( data => {
-        this.loading = false;
-        this.reportDefinition = data;
+      const reportSubs = this.reportsService.getReportDefinition(this.id.toString()).subscribe( data => {
+          this.reportDefinition = data;
+          this.loading = false;
       });
+
+      // const connSubs = this.referenceDataService.getAvailableConnections();
+      // reportSubs. concat(connSubs)
     });
   }
 

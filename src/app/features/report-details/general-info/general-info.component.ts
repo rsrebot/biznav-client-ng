@@ -11,9 +11,34 @@ export class GeneralInfoComponent implements OnInit {
   @Input('reportDefinition')
   set setReportDefinition(val: QueryDefViewModel) {
     this.reportDefinition = val;
+    if (val) {
+      this.loadDefinition(val);
+    }
   }
 
+  @Input()
+  editable = false;
+
+  @Input()
+  availableConnections: string[];
+
   reportDefinition: QueryDefViewModel;
+
+  name: string;
+  caption: string;
+  shortDescription: string;
+  connection: string;
+  helpText: string;
+  comment: string;
+
+  loadDefinition(def: QueryDefViewModel) {
+    this.name = def.name;
+    this.caption = def.caption;
+    this.connection = def.connection;
+    this.shortDescription = def.description;
+    this.helpText = def.help;
+    this.comment = def.comment;
+  }
 
   constructor() { }
 

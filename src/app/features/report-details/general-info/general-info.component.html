@@ -1,3 +1,37 @@
-<p>
-  general-info works!
-</p>
+<div class="card-body">
+  <form>
+    <div class="form-row">
+      <div class="col-8 form-group">
+        <label for="name">Name</label>
+        <input [disabled]="!editable" type="text" class="form-control" name="name" id="name" placeholder="Report Name" [(ngModel)]="name">
+      </div>
+      <div class="col-4 form-group">
+        <label for="connection">Connection</label>
+        <select class="form-control" id="connection" name="connection" [(ngModel)]="connection" [disabled]="!editable">
+          <option *ngFor="let conn of availableConnections" [value]="conn">{{conn}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-12">
+        <label for="short-desc">Short Decription</label>
+        <input [disabled]="!editable" type="text" class="form-control" name="short-desc" id="short-desc" placeholder="Enter a description" [(ngModel)]="shortDescription">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-12">
+        <label for="short-desc">Help Text</label>
+        <textarea [disabled]="!editable" type="text" class="form-control" name="help-text" id="help-text" placeholder="Enter text" [(ngModel)]="helpText">
+        </textarea>
+      </div>
+    </div>
+    <div class="row card-body">
+      <div class="col-sm-12">
+        <div class="pull-right">
+          <button class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+          <button class="btn"><i class="fa fa-remove"></i> Cancel</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

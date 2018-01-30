@@ -4,10 +4,29 @@
       <i class="fa fa-bars"></i>
     </a>
     <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
-      <li *ngIf="isReprot()" role="menuitem"><a [routerLink]="['/dashboard', 'reports', item.id]" class="dropdown-item"><i class="fa fa-calendar"></i> Schedule</a></li>
-      <li *ngIf="isReprot()" role="menuitem"><a [routerLink]="['/dashboard']" class="dropdown-item"><i class="fa fa-edit"></i> Edit</a></li>
-      <li *ngIf="isReprot() || isFolder()" role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-remove"></i> Delete</a></li>
+      <li *ngIf="isFolder()" role="menuitem"><a (click)="showNameModal(item, promptNameTemplate)" class="dropdown-item"><i class="fa fa-folder"></i> Add Folder</a></li>
+      <li *ngIf="isFolder()" role="menuitem"><a (click)="showNameModal(item, promptNameTemplate)" class="dropdown-item"><i class="fa fa-plus-square-o"></i> Create Report</a></li>
+      <li *ngIf="isReport()" role="menuitem"><a (click)="showNameModal(item, promptNameTemplate)" class="dropdown-item"><i class="fa fa-copy"></i> Copy Report</a></li>
+      <li *ngIf="isReport()" role="menuitem"><a [routerLink]="['/dashboard', 'reports', item.id]" class="dropdown-item"><i class="fa fa-calendar"></i> Schedule</a></li>
+      <li *ngIf="isReport()" role="menuitem"><a [routerLink]="['/dashboard']" class="dropdown-item"><i class="fa fa-edit"></i> Edit</a></li>
+      <li *ngIf="(isReport() || isFolder()) && item.children.length < 1" role="menuitem"><a class="dropdown-item" href="#"><i class="fa fa-remove"></i> Delete</a></li>
     </ul>
   </div>
 </div>
+<ng-template #promptNameTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Enter Name</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <input type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary form-control" (click)="createNew(item, 'test', treeItemType.folder)">Create</button>
+    </div>
+  </div>
+</ng-template>
 

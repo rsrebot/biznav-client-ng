@@ -9,6 +9,7 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 import { LoadingModule } from 'ngx-loading';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { ModalModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { RouterModule } from '@angular/router';
     BsDropdownModule,
     LoadingModule,
     BrowserAnimationsModule,
-    RouterModule
+    RouterModule,
+    ModalModule
   ],
   exports: [
     ReportsListComponent

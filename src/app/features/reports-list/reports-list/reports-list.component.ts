@@ -46,7 +46,7 @@ export class ReportsListComponent implements OnInit {
       this.root = this.mapDataToTreeItem(data);
       this.root.collapsable = false;
       this.root.collapsed = false;
-      this.root.showActions = false
+      this.root.showActions = false;
       this.root.showVersion = false;
       this.root.text = 'Reports';
     }, error => {

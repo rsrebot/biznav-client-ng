@@ -15,7 +15,7 @@
 <div class="card rounded-0 card-body">
   <tabset>
     <tab heading="General" id="rpt-general">
-      <app-general-info [reportDefinition]="reportDefinition"></app-general-info>
+      <app-general-info [editable]="editable" [availableConnections]="availableConnections" [reportDefinition]="reportDefinition"></app-general-info>
     </tab>
     <tab heading="Columns" id="rpt-cols">
       <app-columns [reportDefinition]="reportDefinition"></app-columns>

@@ -37,7 +37,14 @@ export class ReportsService {
     return this.http.get(apiURL)
       .map(res => {
         return res as QueryDefViewModel;
-      });
+    });
+  }
+
+  createNewFolder(parentId: number, name: string) {
+    const apiURL = this.url + '/rest/folder?parentFolderId=' + parentId +
+    '&folderName=' + name;
+
+    return this.http.post(apiURL, null);
   }
 
   private treeParser(item: any) {
