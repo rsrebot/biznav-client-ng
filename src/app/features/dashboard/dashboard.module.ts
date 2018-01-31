@@ -5,12 +5,14 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
 import { SidebarModule } from 'ng-sidebar';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    SidebarModule
+    SidebarModule,
+    BsDropdownModule
   ],
   exports: [
     DashboardComponent

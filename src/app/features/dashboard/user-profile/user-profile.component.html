@@ -1,5 +1,12 @@
 <div *ngIf="isLoggedIn()">
-  <i class="fa fa-user"></i> {{user.userName}} <a class="" (click)="logout()">Log out</a>
+  <div class="btn-group" dropdown placement="bottom left">
+    <a dropdownToggle class="btn btn-sm btn-primary dropdownToggle text-dark pt-0 pd-0">
+      <i class="fa fa-user"></i> {{user.userName}} <i class="fa fa-caret-down"></i>
+    </a>
+    <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+      <li role="menuitem"><a (click)="logout()" class="dropdown-item"><i class="fa fa-sign-out"></i> Logout</a></li>
+    </ul>
+  </div>
 </div>
 <div *ngIf="!isLoggedIn()">
   Login
