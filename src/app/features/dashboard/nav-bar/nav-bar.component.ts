@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserProfileComponent } from '@app/features/dashboard/user-profile/user-profile.component';
 
 @Component({
   selector: 'app-nav-bar',
