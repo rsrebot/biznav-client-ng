@@ -13,23 +13,28 @@ export class AuthInterceptor implements HttpInterceptor {
       private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
-    const token = localStorage.getItem(TOKEN_NAME);
-    if(token) {
-      // TODO: might want to store the expiration data unencoded and use it instead of decoding the token
-      const expDate = this.authService.getTokenExpirationDate(token);
-      const now = new Date().getUTCDate();
 
-      let secondsUntilExpiration = (expDate.getTime() - now) / 1000;
-      if(secondsUntilExpiration > 0 && secondsUntilExpiration < 10){
+    const expDate = this.authService.getTokenExpirationDate();
+    if (expDate) {
+      // TODO: might want to store the expiration data unencoded and use it instead of decoding the token
+      // const expDate = this.authService.getTokenExpirationDate();
+      const token = this.authService.getToken();
+      const now = new Date();
+
+      const secondsUntilExpiration = (expDate.getTime() - now.getTime()) / 1000;
+      if (secondsUntilExpiration > 0 && secondsUntilExpiration < 30) {
         // refresh token
-        // service.refresh(token);
+        this.authService.refreshAuthToken().then(res => {
+          // token refreshed
+        }).catch(err => {
+          // log ?
+        });
       }
 
       let headers = new HttpHeaders();
       headers = req.headers.append('Accept', 'application/json');
       headers = headers.append(AUTH_HEADER_KEY, `${AUTH_PREFIX} ${token}`);
-      
+
       req = req.clone({headers: headers});
     }
 

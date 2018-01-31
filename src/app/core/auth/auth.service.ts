@@ -11,7 +11,8 @@ export const TOKEN_NAME = 'jwt_token';
 @Injectable()
 export class AuthService {
 
-  private url = environment.apiUrl + '/token';
+  private tokenUrl = environment.apiUrl + '/token';
+  private refreshUrl = environment.apiUrl + '/refresh';
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private currentUserSubject = new BehaviorSubject<User>(null);
 
@@ -20,15 +21,24 @@ export class AuthService {
     this.currentUserSubject.next(this.getCurrentUserFromToken(token));
   }
 
-  private getToken(): string {
+  getToken(): string {
     return localStorage.getItem(TOKEN_NAME);
   }
 
   private setToken(token: string): void {
+    if (token == null) {
+      localStorage.removeItem(TOKEN_NAME);
+    }
     localStorage.setItem(TOKEN_NAME, token);
   }
 
-  getTokenExpirationDate(token: string): Date {
+  getTokenExpirationDate(): Date {
+    const token = this.getToken();
+
+    if (!token) {
+      return null;
+    }
+
     const decoded: any = jwt_decode(token);
 
     if (decoded.exp === undefined) {
@@ -49,7 +59,7 @@ export class AuthService {
       return true;
     }
 
-    const date = this.getTokenExpirationDate(token);
+    const date = this.getTokenExpirationDate();
     if (date === undefined) {
       return false;
     }
@@ -58,7 +68,7 @@ export class AuthService {
 
   login(user, password): Promise<string> {
     return this.http
-      .post(`${this.url}`, JSON.stringify({'username': user, 'password': password}), { headers: this.headers })
+      .post(`${this.tokenUrl}`, JSON.stringify({'username': user, 'password': password}), { headers: this.headers })
       .toPromise()
       .then(res => {
           const token = res.json().accessToken;
@@ -71,8 +81,23 @@ export class AuthService {
         });
   }
 
+  refreshAuthToken(): Promise<string> {
+    return this.http
+      .get(this.refreshUrl,
+        { headers: new Headers({
+          'Content-Type': 'application/json',
+          'Authorization': 'bearer ' + this.getToken()}) })
+      .toPromise()
+      .then(res => {
+        const token = res.json().accessToken;
+        this.setToken(token);
+
+        return res.text();
+      });
+  }
+
   private getCurrentUserFromToken(token: string): User {
-    if (token == null) {
+    if (!token || token == null) {
       return null;
     }
     const decoded: any = jwt_decode(token);

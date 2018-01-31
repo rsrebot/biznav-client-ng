@@ -22,11 +22,14 @@ import { MessageBus } from 'ngx-message-bus';
 import { BsDropdownModule, TabsModule, ModalModule } from 'ngx-bootstrap';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthGuard } from '@app/core/auth/auth.guard';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, 
+  { path: 'dashboard', component: DashboardComponent,
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
     children: [
       { path: 'reports', component: ReportsListComponent },
       { path: 'reports/:id', component: ReportDetailsComponent },
