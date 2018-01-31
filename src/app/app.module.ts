@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
-import { FeaturesModule, 
-          LoginComponent, 
-          ReportsListComponent, 
-          DashboardComponent, 
+import { FeaturesModule,
+          LoginComponent,
+          ReportsListComponent,
+          DashboardComponent,
           ReportDetailsComponent } from '@app/features';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';

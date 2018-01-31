@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ReportsService, IReportTreeNode } from '@app/core';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 import { ITreeItem, TreeItemType, TreeItem } from '@app/features/reports-list/tree-view/tree-view.component';
 import { Subject } from 'rxjs/Subject';
 import { ToastrService } from 'ngx-toastr';
@@ -35,7 +35,7 @@ export class ReportsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.filterSubject.debounceTime(1000).subscribe(value =>{
+    this.filterSubject.debounceTime(1000).subscribe(value => {
       this._filter = value as string;
     });
 
@@ -59,7 +59,7 @@ export class ReportsListComponent implements OnInit {
   }
 
   private mapDataToTreeItem(data: IReportTreeNode): ITreeItem {
-    let item =  new TreeItem(data.id, data.text, 
+    const item =  new TreeItem(data.id, data.text,
         data.type.toLowerCase() === 'folder' ? TreeItemType.folder : TreeItemType.report);
 
     item.version = data.version;
@@ -70,25 +70,29 @@ export class ReportsListComponent implements OnInit {
       const firstTxt = first == null ? null : first.text == null ? null : first.text.toLowerCase();
       const secondTxt = second == null ? null : second.text == null ? null : second.text.toLowerCase();
 
-      if (firstTxt == secondTxt) {
+      if (firstTxt === secondTxt) {
         const v1 = first == null ? null : first.version;
         const v2 = second == null ? null : second.version;
 
-        if (v1 === v2)
+        if (v1 === v2) {
           return 0;
+        }
 
-        if (v1 < v2)
+        if (v1 < v2) {
           return 1;
+        }
 
-        if(v1 > v2)
+        if (v1 > v2) {
           return -1;
+        }
 
         return 0;
       }
-      if (firstTxt < secondTxt) 
+      if (firstTxt < secondTxt) {
         return -1;
-      else
+      } else {
           return 1;
+      }
     }).map(child => this.mapDataToTreeItem(child));
 
     return item;
