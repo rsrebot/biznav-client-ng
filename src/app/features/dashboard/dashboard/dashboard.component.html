@@ -1,4 +1,4 @@
- <app-nav-bar></app-nav-bar> 
+<app-nav-bar></app-nav-bar> 
 <div class="conatainer-fluid">
   <div class="row">
     <ng-sidebar-container style="height: calc(100vh - 72px);">
@@ -23,13 +23,12 @@
           </nav>
       </div>
     </ng-sidebar>
-
     <!-- Page content -->
-    <div ng-sidebar-content class="h-100">
-      <div class="card card-body bg-light rounded-0">
+    <div ng-sidebar-content class="card">
+      <div class="container rounded-0">
         <div class="card card-body rounded-0 m-1">
         </div>
-        <div class="card card-body rounded-0 m-1 h-100">
+        <div class="rounded-0 m-1 h-100">
           <router-outlet></router-outlet>
         </div>
       </div>

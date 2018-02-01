@@ -20,7 +20,7 @@ export class QueryEditorComponent implements OnInit, AfterViewInit  {
   set setSelected(val: boolean) {
     this.selected = val;
     const that = this;
-    if  (this.selected && this.editor && this.editor.instance) {
+    if (this.selected && this.editor && this.editor.instance) {
       setTimeout(function() {
         that.editor.instance.refresh();
         that.editor.instance.focus();

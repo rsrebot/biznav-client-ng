@@ -13,7 +13,7 @@
   </div>
 </div>
 <div class="card rounded-0 card-body">
-  <tabset>
+  <tabset type="pills">
     <tab heading="General" id="rpt-general" (select)="selectTab($event)">
       <app-general-info [editable]="editable" [reportDefinition]="reportDefinition" [selected]="selectedTab === 'rpt-cols'"></app-general-info>
     </tab>

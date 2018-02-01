@@ -1,8 +1,10 @@
-<codemirror [(ngModel)]="code" #editor
-  [config]="config"
-  (focus)="onFocus()"
-  (blur)="onBlur()">
-</codemirror>
+<div class="card-body">
+  <codemirror [(ngModel)]="code" #editor
+    [config]="config"
+    (focus)="onFocus()"
+    (blur)="onBlur()">
+  </codemirror>
+</div>
 <div class="card-body">
   <div class="pull-right">
     <button class="btn btn-info"><i class="fa fa-check"></i> Validate</button>
