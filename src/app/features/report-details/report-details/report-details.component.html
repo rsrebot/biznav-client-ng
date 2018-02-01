@@ -14,19 +14,19 @@
 </div>
 <div class="card rounded-0 card-body">
   <tabset>
-    <tab heading="General" id="rpt-general">
-      <app-general-info [editable]="editable" [availableConnections]="availableConnections" [reportDefinition]="reportDefinition"></app-general-info>
+    <tab heading="General" id="rpt-general" (select)="selectTab($event)">
+      <app-general-info [editable]="editable" [reportDefinition]="reportDefinition" [selected]="selectedTab === 'rpt-cols'"></app-general-info>
     </tab>
-    <tab heading="Columns" id="rpt-cols">
-      <app-columns [reportDefinition]="reportDefinition"></app-columns>
+    <tab heading="Columns" id="rpt-cols" (select)="selectTab($event)">
+      <app-columns [reportDefinition]="reportDefinition" [selected]="selectedTab === 'rpt-cols'"></app-columns>
     </tab>
-    <tab heading="Parameters" id="rpt-params">
+    <tab heading="Parameters" id="rpt-params" (select)="selectTab($event)">
       <app-parameters [reportDefinition]="reportDefinition"></app-parameters>
     </tab>
-    <tab heading="Query" id="rpt-query">
-      <app-query-editor [reportDefinition]="reportDefinition"></app-query-editor>
+    <tab heading="Query" id="rpt-query" (select)="selectTab($event)">
+      <app-query-editor [reportDefinition]="reportDefinition" [selected]="selectedTab === 'rpt-query'"></app-query-editor>
     </tab>
-    <tab heading="Security" id="rpt-params">
+    <tab heading="Security" id="rpt-params" (select)="selectTab($event)">
       <app-security [reportDefinition]="reportDefinition"></app-security>
     </tab>
   </tabset>

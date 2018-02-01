@@ -21,12 +21,14 @@ export class ReportDetailsComponent implements OnInit, OnDestroy {
   editable = true;
 
   loading = false;
-
   reportDefinition: QueryDefViewModel;
-
-  availableConnections: string[];
+  selectedTab: string;
 
   private sub: any;
+
+  private selectTab(tab) {
+    this.selectedTab = tab.id;
+  }
 
   constructor(private route: ActivatedRoute, private reportsService: ReportsService, private referenceDataService: ReferenceDataService) { }
 
@@ -39,9 +41,6 @@ export class ReportDetailsComponent implements OnInit, OnDestroy {
           this.reportDefinition = data;
           this.loading = false;
       });
-
-      // const connSubs = this.referenceDataService.getAvailableConnections();
-      // reportSubs. concat(connSubs)
     });
   }
 

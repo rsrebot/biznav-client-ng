@@ -101,7 +101,7 @@ export class AuthService {
       return null;
     }
     const decoded: any = jwt_decode(token);
-    const userData = new User(1, 'Test User', 'rsrebot@gmail.com');
+    const userData = new User(decoded.sub, decoded.Name, decoded.Email);
 
     return userData;
   }

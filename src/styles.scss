@@ -7,6 +7,15 @@
 @import '../node_modules/codemirror/lib/codemirror.css';
 @import '../node_modules/codemirror/theme/dracula.css';
 
+
+bs-modal-backdrop {
+  z-index: 100000000 !important;
+}
+
+modal-container {
+  z-index: 100000010 !important;
+}
+
 /*Fade out the particular DIV when user hover on that DIV*/
 .highlight-container .box:hover>.box1{
   color: white;

@@ -13,6 +13,12 @@ export class ColumnsComponent implements OnInit {
     this.reportDefinition = val;
   }
 
+  @Input('selected')
+  set setSelected(val: boolean) {
+    this.selected = val;
+  }
+
+  selected = false;
   reportDefinition: QueryDefViewModel;
 
   constructor() { }

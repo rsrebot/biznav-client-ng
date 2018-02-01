@@ -1,12 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { QueryDefViewModel } from "@app/core";
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { QueryDefViewModel, ReferenceDataService } from '@app/core';
 
 @Component({
   selector: 'app-general-info',
   templateUrl: './general-info.component.html',
   styleUrls: ['./general-info.component.scss']
 })
-export class GeneralInfoComponent implements OnInit {
+export class GeneralInfoComponent implements OnInit, OnDestroy {
 
   @Input('reportDefinition')
   set setReportDefinition(val: QueryDefViewModel) {
@@ -19,9 +19,14 @@ export class GeneralInfoComponent implements OnInit {
   @Input()
   editable = false;
 
-  @Input()
-  availableConnections: string[];
+  @Input('selected')
+  set setSelected(val: boolean) {
+    this.selected = val;
+  }
 
+  selected = false;
+
+  availableConnections: string[];
   reportDefinition: QueryDefViewModel;
 
   name: string;
@@ -40,9 +45,15 @@ export class GeneralInfoComponent implements OnInit {
     this.comment = def.comment;
   }
 
-  constructor() { }
+  constructor(private referenceService: ReferenceDataService) { }
 
   ngOnInit() {
+    this.referenceService.getAvailableConnections().subscribe(connections => {
+      this.availableConnections = connections;
+    });
   }
 
+  ngOnDestroy() {
+
+  }
 }
