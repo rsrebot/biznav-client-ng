@@ -16,8 +16,11 @@ modal-container {
   z-index: 100000010 !important;
 }
 
-.CodeMirror {
-  height: 500px;
+@media (min-height: 769px)
+{
+  .CodeMirror {
+    height: 500px;
+  }
 }
 
 /*Fade out the particular DIV when user hover on that DIV*/
