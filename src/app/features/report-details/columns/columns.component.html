@@ -20,16 +20,23 @@
     <tbody *ngIf="reportDefinition">
       <tr *ngFor="let col of reportDefinition.columns" scope="row">
         <td>
+          <!-- <input type="text" [(ngModel)]="col.name" class="form-control form-control-sm"/> -->
           {{col.name}}
         </td>
         <td>
-          {{col.caption}}
+          <input type="text" [(ngModel)]="col.caption" class="form-control form-control-sm"/>
         </td>
         <td>
-          {{col.dataType}}
+          <div class="">
+            <select class="form-control form-control-sm" id="colType" name="colType" [(ngModel)]="col.dataType">
+              <option *ngFor="let type of columnTypes" [value]="type">{{type}}</option>
+            </select>
+          </div>
         </td>
         <td>
-          {{col.visible}}
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="default-check" [(ngModel)]="col.visible">
+          </div>
         </td>
       </tr>
     </tbody>

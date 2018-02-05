@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { QueryDefViewModel } from "@app/core";
+import { QueryDefViewModel, ReferenceDataService } from "@app/core";
 
 @Component({
   selector: 'app-parameters',
@@ -20,10 +20,14 @@ export class ParametersComponent implements OnInit {
 
   selected = false;
   reportDefinition: QueryDefViewModel;
+  paramTypes: string[];
 
-  constructor() { }
+  constructor(private referenceService: ReferenceDataService) { }
 
   ngOnInit() {
+    this.referenceService.getAvailableParamTypes().subscribe(types => {
+      this.paramTypes = types;
+    });
   }
 
 }

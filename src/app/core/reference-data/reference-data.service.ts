@@ -22,6 +22,14 @@ export class ReferenceDataService {
     return  Observable.of(['Equator', 'EL5']);
   }
 
+  getAvailableColumnTypes(): Observable<string[]> {
+    return Observable.of(['WideString', 'Number']);
+  }
+
+  getAvailableParamTypes(): Observable<string[]> {
+    return Observable.of(['mptDateRangeRNG', 'mptDateRange']);
+  }
+
   getLookups(objId: string, paramName: string): Observable<string> {
     const apiURL = this.url + '/rest/lookup/' + objId + '/' + paramName;
     return this.http.get(apiURL)
