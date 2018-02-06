@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { QueryDefViewModel, TMisQuery, DRColumn,
   DROutputOption, DROutputFormat, DROutputProtocol, DROutputOptions,
   DROutputContainer, DRParameterValue, DRParameter, DRQueryMode,
-  DRQueryBase, DRQuery, TMisColumn, TMisParam, TMisLookup, TMisParamType,
+  DRQueryBase, DRQuery, TMisColumn, TMisParam, TMisLookup, TMisParamType, QueryValidator,
   } from './report-definition';
 
 @Injectable()
@@ -37,6 +37,14 @@ export class ReportsService {
     return this.http.get(apiURL)
       .map(res => {
         return res as QueryDefViewModel;
+    });
+  }
+
+  validateReportDefinition(rptDefinition: QueryDefViewModel): Observable<QueryValidator> {
+    const apiURL = this.url + '/rest/query/definition/validate';
+    return this.http.post(apiURL, rptDefinition)
+      .map(res => {
+        return res as QueryValidator;
     });
   }
 

@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import {TOKEN_NAME, AuthService} from './auth.service';
 import { Log, Level } from 'ng2-logger/client';
+import { Router } from '@angular/router';
+import 'rxjs/add/operator/catch';
 
 const AUTH_HEADER_KEY = 'Authorization';
 const AUTH_PREFIX = 'Bearer';
@@ -12,7 +14,7 @@ const log = Log.create('AuthInterceptor');
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(
-      private authService: AuthService) { }
+      private authService: AuthService, private router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -39,6 +41,22 @@ export class AuthInterceptor implements HttpInterceptor {
       req = req.clone({headers: headers});
     }
 
-    return next.handle(req);
+    return next.handle(req)
+    // .map((event: HttpEvent<any>) => {
+    //   if (event instanceof HttpErrorResponse) {
+    //     if (event.status === 401) {
+    //       this.router.navigateByUrl('/login');
+    //     }
+    //   }
+    //   return event;
+    // });
+    .catch(err => {
+      if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this.router.navigateByUrl('/login');
+          }
+      }
+      return Observable.throw(err);
+    });
   }
 }

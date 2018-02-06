@@ -295,3 +295,15 @@ export class TMisQuery {
   // USERNAME
   public username: string = null;
 }
+
+export class QueryValidator {
+    public oldColumnNames: string[];
+
+    public oldParamNames: string[];
+
+    public colsModified: boolean;
+
+    public paramsModified: boolean;
+
+    public errorMessage: string;
+}

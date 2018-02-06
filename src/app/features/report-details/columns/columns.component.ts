@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { QueryDefViewModel, ReferenceDataService } from "@app/core";
+import { QueryDefViewModel, ReferenceDataService, ReferenceData } from "@app/core";
 
 @Component({
   selector: 'app-columns',
@@ -20,7 +20,7 @@ export class ColumnsComponent implements OnInit {
 
   selected = false;
   reportDefinition: QueryDefViewModel;
-  columnTypes: string[];
+  columnTypes: ReferenceData<number>[];
 
   constructor(private referenceService: ReferenceDataService) { }
 

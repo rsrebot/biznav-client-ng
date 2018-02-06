@@ -37,7 +37,7 @@
         <td>
           <div class="">
             <select class="form-control form-control-sm" id="paramType" name="paramType" [(ngModel)]="param.paramType">
-              <option *ngFor="let type of paramTypes" [value]="type">{{type}}</option>
+              <option *ngFor="let type of paramTypes" [value]="type.id">{{type.text}}</option>
             </select>
           </div>
         </td>

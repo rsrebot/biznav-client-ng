@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, ViewChild, AfterViewInit } from '@angular/core';
 import { CodemirrorComponent } from 'ng2-codemirror';
 import 'codemirror/mode/sql/sql';
-import { QueryDefViewModel } from '@app/core';
+import { QueryDefViewModel, ReportsService } from '@app/core';
 
 @Component({
   selector: 'app-query-editor',
@@ -41,7 +41,17 @@ export class QueryEditorComponent implements OnInit, AfterViewInit  {
      theme: 'dracula'
   };
 
-  constructor() { }
+  constructor(private reportService: ReportsService) { }
+
+  validateQuery() {
+    this.reportDefinition.sql = this.code;
+    this.reportService.validateReportDefinition(this.reportDefinition).subscribe(resp => {
+      this.reportDefinition.params.forEach(p => {
+        console.log(p.name);
+      });
+      console.log(resp.oldParamNames);
+    });
+  }
 
   onFocus() {
 
