@@ -306,4 +306,6 @@ export class QueryValidator {
     public paramsModified: boolean;
 
     public errorMessage: string;
+
+    public updatedDefinition: QueryDefViewModel;
 }

@@ -43,8 +43,13 @@ export class ReportsService {
   validateReportDefinition(rptDefinition: QueryDefViewModel): Observable<QueryValidator> {
     const apiURL = this.url + '/rest/query/definition/validate';
     return this.http.post(apiURL, rptDefinition)
-      .map(res => {
-        return res as QueryValidator;
+      .map(response => {
+        const resp = response as any;
+        const validator = resp.queryValidator as QueryValidator;
+        const updatedQueryDef = resp.queryDef;
+        validator.updatedDefinition = updatedQueryDef;
+
+        return validator;
     });
   }
 
