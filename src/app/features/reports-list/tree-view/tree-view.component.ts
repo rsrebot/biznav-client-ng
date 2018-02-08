@@ -40,8 +40,8 @@ export class TreeViewComponent implements OnInit, OnDestroy {
 
   isLatestVersion(item: ITreeItem) {
     // TODO: we should have a isLatest property coming form the back
-    return this.isFolder(item) 
-          || item.status == 'RDY';
+    return this.isFolder(item)
+          || item.status === 'RDY';
   }
 
   changeCollapsedState(item: ITreeItem) {
@@ -92,7 +92,7 @@ export class TreeViewComponent implements OnInit, OnDestroy {
   }
 
   reportSelected(item: ITreeItem) {
-    this.router.navigateByUrl('dashboard/reports/' + item.id);
+    this.router.navigateByUrl('dashboard/reports/' + item.id + ',' + item.version);
   }
 
   private setTreeItemVisibility(item: ITreeItem, filterStr: string): boolean {

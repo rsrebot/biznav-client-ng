@@ -1,10 +1,12 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import {TOKEN_NAME, AuthService} from './auth.service';
 import { Log, Level } from 'ng2-logger/client';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+// import 'rxjs/add/operator/throw';
 
 const AUTH_HEADER_KEY = 'Authorization';
 const AUTH_PREFIX = 'Bearer';
@@ -43,11 +45,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(req)
     // .map((event: HttpEvent<any>) => {
-    //   if (event instanceof HttpErrorResponse) {
-    //     if (event.status === 401) {
-    //       this.router.navigateByUrl('/login');
-    //     }
-    //   }
     //   return event;
     // });
     .catch(err => {

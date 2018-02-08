@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, ViewChild, AfterViewInit } from '@ang
 import { CodemirrorComponent } from 'ng2-codemirror';
 import 'codemirror/mode/sql/sql';
 import { QueryDefViewModel, ReportsService } from '@app/core';
-import { ToastrService } from "ngx-toastr";
+import { ToastrService } from 'ngx-toastr';
+import * as sqlFormatter from 'sql-formatter';
 
 @Component({
   selector: 'app-query-editor',
@@ -14,7 +15,8 @@ export class QueryEditorComponent implements OnInit, AfterViewInit  {
   @Input('reportDefinition')
   set setReportDefinition(val: QueryDefViewModel) {
     this.reportDefinition = val;
-    this.code = val ? val.sql : '';
+    const theCode = val ? val.sql : '';
+    this.code = theCode;
   }
 
   @Input('selected')
@@ -44,24 +46,8 @@ export class QueryEditorComponent implements OnInit, AfterViewInit  {
 
   constructor(private reportService: ReportsService, private toastr: ToastrService) { }
 
-  validateQuery() {
-    this.reportDefinition.sql = this.code;
-    this.reportService.validateReportDefinition(this.reportDefinition).subscribe(resp => {
-      if (resp.errorMessage) {
-        this.toastr.error(resp.errorMessage);
-        return;
-      }
-      if (resp.paramsModified) {
-        this.toastr.info('Parameters Modified');
-      }
-      if (resp.colsModified) {
-        this.toastr.info('Columns Modified');
-      }
-
-      this.toastr.success('Validation OK');
-
-      this.reportDefinition = resp.updatedDefinition;
-    });
+  format() {
+    this.code = sqlFormatter.format(this.code);
   }
 
   onFocus() {

@@ -2,7 +2,7 @@
 <div class="card card-header rounded-0">
   <div class="row">
     <div class="col-10">
-      <h4 *ngIf="reportDefinition">{{reportDefinition.caption}}</h4>
+      <h4 *ngIf="reportDefinition">{{reportDefinition.caption}} - version: {{reportDefinition.misQuery.fileVersion}} - status: {{reportDefinition.misQuery.statusID}}</h4>
       <h4 *ngIf="!reportDefinition">New Report</h4>
     </div>
     <div class="col-2">
@@ -30,4 +30,11 @@
       <app-security [reportDefinition]="reportDefinition"></app-security>
     </tab>
   </tabset>
+</div>
+<div class="card-body">
+  <div class="float-right mb-3">
+    <button class="btn btn-info" (click)="validateQuery()" ><i class="fa fa-check"></i> Validate</button>
+    <button class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+    <button class="btn"><i class="fa fa-remove"></i> Cancel</button>
+  </div>
 </div>
