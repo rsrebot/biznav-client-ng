@@ -18,8 +18,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { environment } from '@env/environment';
 import { ReportsListModule } from '@app/features/reports-list';
 import { PageNotFoundComponent } from '@app/shared';
-import { MessageBus } from 'ngx-message-bus';
-import { BsDropdownModule, TabsModule, ModalModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, ModalModule, TypeaheadModule } from 'ngx-bootstrap';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from '@app/core/auth/auth.guard';
@@ -67,7 +66,8 @@ const appRoutes: Routes = [
     ToastrModule.forRoot({
       positionClass: 'toast-top-full-width'
     }),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   providers: [
     AuthService,
@@ -76,8 +76,7 @@ const appRoutes: Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    },
-    MessageBus
+    }
   ],
   bootstrap: [AppComponent]
 })

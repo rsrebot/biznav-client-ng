@@ -31,7 +31,7 @@ export class ReportDetailsComponent implements OnInit, OnDestroy {
 
   private sub: any;
 
-  private selectTab(tab) {
+  public selectTab(tab) {
     this.selectedTab = tab.id;
   }
 

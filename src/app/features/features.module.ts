@@ -5,6 +5,7 @@ import { ReportsListModule } from './reports-list';
 import { DashboardModule } from './dashboard';
 import { ReportDetailsModule } from './report-details';
 import { RouterModule } from '@angular/router';
+import { TypeaheadModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
     ReportsListModule,
     DashboardModule,
     ReportDetailsModule,
-    RouterModule
+    RouterModule,
+    TypeaheadModule
   ],
   exports: [],
   declarations: []

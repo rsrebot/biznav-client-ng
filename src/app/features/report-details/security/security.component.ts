@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { QueryDefViewModel } from "@app/core";
+import { QueryDefViewModel } from '@app/core';
 
 @Component({
   selector: 'app-security',
@@ -12,6 +12,9 @@ export class SecurityComponent implements OnInit {
   set setReportDefinition(val: QueryDefViewModel) {
     this.reportDefinition = val;
   }
+
+  groups: ['A', 'Ab', 'Abc'];
+  selected: string;
 
   reportDefinition: QueryDefViewModel;
 
