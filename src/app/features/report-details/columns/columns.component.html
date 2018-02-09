@@ -27,11 +27,12 @@
           <input type="text" [(ngModel)]="col.caption" class="form-control form-control-sm"/>
         </td>
         <td>
-          <div class="">
+          <input type="text" [(ngModel)]="col.dataType" class="form-control form-control-sm" disabled/>
+          <!-- <div class="">
             <select class="form-control form-control-sm" id="colType" name="colType" [(ngModel)]="col.dataType">
               <option *ngFor="let type of columnTypes" [value]="type.text">{{type.text}}</option>
             </select>
-          </div>
+          </div> -->
         </td>
         <td>
           <div class="form-check">

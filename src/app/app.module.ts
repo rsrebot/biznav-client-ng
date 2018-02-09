@@ -64,7 +64,9 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: !environment.production } // <-- debugging purposes only
     ),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-full-width'
+    }),
     ModalModule.forRoot()
   ],
   providers: [

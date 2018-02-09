@@ -6,8 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/concat';
 import 'rxjs/add/operator/combineAll';
 import 'rxjs/add/observable/of';
-import { ToastrService } from "ngx-toastr";
-import { QueryEditorComponent } from "@app/features/report-details/query-editor/query-editor.component";
+import { ToastrService } from 'ngx-toastr';
+import { QueryEditorComponent } from '@app/features/report-details/query-editor/query-editor.component';
 
 @Component({
   selector: 'app-report-details',
