@@ -1,0 +1,38 @@
+<div *ngIf="displayMode === paramLookupMode.noneSelected">
+  <a href="#" [routerLink]="" class="text-info">none</a>
+</div>
+<div *ngIf="displayMode === paramLookupMode.sqlSelected">
+  <a href="#" [routerLink]="" class="text-info" (click)="showSqlEditor(templateSql)">SQL Query</a>
+</div>
+<div *ngIf="displayMode === paramLookupMode.lookupSelected">
+  <a href="#" [routerLink]="" class="text-info" (click)="showLookupEditor(templateLookup)">Lookup Values</a>
+</div>
+
+<ng-template #templateLookup>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Lookup Values</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Lookup
+  </div>
+</ng-template>
+
+<ng-template #templateSql>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">SQL</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <codemirror [(ngModel)]="code" #editor [config]="config">
+    </codemirror>
+    <div class="float-right mt-3">
+      <button class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+      <button class="btn"><i class="fa fa-remove"></i> Cancel</button>
+   </div>
+  </div>
+</ng-template>

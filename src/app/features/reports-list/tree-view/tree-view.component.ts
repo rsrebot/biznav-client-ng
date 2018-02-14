@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { trigger, style, animate, transition  } from '@angular/animations';
-import { Subject } from "rxjs/Subject";
+import { Subject } from 'rxjs/Subject';
 
 @Component({
-  selector: 'app-tree-view',  
+  selector: 'app-tree-view',
   templateUrl: './tree-view.component.html',
   styleUrls: ['./tree-view.component.scss'],
   animations: [
@@ -143,8 +143,8 @@ export interface ITreeItem {
   collapsable: boolean;
   showActions: boolean;
   showVersion: boolean;
-  version: number,
-  status: string
+  version: number;
+  status: string;
 }
 
 export class TreeItem implements ITreeItem {

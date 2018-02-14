@@ -55,8 +55,7 @@
           <input type="text" [(ngModel)]="param.default" class="form-control form-control-sm"/>
         </td>
         <td>
-          <!-- {{param.lookup ? param.lookup.sql : ''}} -->
-          ...
+          <app-param-lookup [param]="param"></app-param-lookup>
         </td>
       </tr>
     </tbody>

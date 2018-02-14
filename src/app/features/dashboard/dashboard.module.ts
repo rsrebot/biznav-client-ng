@@ -5,6 +5,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
 import { SidebarModule } from 'ng-sidebar';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { MessagesComponent } from './messages/messages.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
@@ -17,6 +18,6 @@ import { BsDropdownModule } from 'ngx-bootstrap';
   exports: [
     DashboardComponent
   ],
-  declarations: [DashboardComponent, NavBarComponent, UserProfileComponent]
+  declarations: [DashboardComponent, NavBarComponent, UserProfileComponent, MessagesComponent]
 })
 export class DashboardModule { }

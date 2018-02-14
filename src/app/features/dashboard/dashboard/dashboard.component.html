@@ -26,7 +26,22 @@
     <!-- Page content -->
     <div ng-sidebar-content class="card h-100" style="overflow-y: scroll">
       <div class="container rounded-0">
-        <div class="card card-body rounded-0 m-1">
+        <div class="card rounded-0 m-1">
+          <div class="card-header p-1" id="headingOne">
+            <h5 class="mb-0">
+              Notifications 
+              <button class="btn btn-link float-right p-0" data-toggle="collapse" data-target="#collapseOne" 
+                aria-expanded="true" aria-controls="collapseOne" (click)="toggleMessageView()">
+                <i class="fa" [ngClass]="{'fa-caret-down': isMessageViewHidden, 'fa-caret-up': !isMessageViewHidden}"></i>
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse" [ngClass]="{'show' : !isMessageViewHidden}" aria-labelledby="headingOne">
+            <div class="card-body">
+               <app-messages></app-messages>
+            </div>
+          </div>          
         </div>
         <div class="rounded-0 m-1 h-100">
           <router-outlet></router-outlet>

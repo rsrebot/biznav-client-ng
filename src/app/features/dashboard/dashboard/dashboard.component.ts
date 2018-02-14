@@ -10,9 +10,14 @@ import { SidebarContainer, Sidebar } from 'ng-sidebar';
 export class DashboardComponent implements OnInit {
 
   sidebarOpened = false;
+  isMessageViewHidden = false;
 
   toggleSidebar() {
     this.sidebarOpened = !this.sidebarOpened;
+  }
+
+  toggleMessageView() {
+    this.isMessageViewHidden = !this.isMessageViewHidden;
   }
 
   constructor() { }

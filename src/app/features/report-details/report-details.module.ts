@@ -11,6 +11,7 @@ import { ParametersComponent } from './parameters/parameters.component';
 import { ColumnsComponent } from './columns/columns.component';
 import { QueryEditorComponent } from './query-editor/query-editor.component';
 import { SecurityComponent } from './security/security.component';
+import { ParamLookupComponent } from './param-lookup/param-lookup.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,6 @@ import { SecurityComponent } from './security/security.component';
     TypeaheadModule
   ],
   declarations: [ReportDetailsComponent, GeneralInfoComponent,
-    ParametersComponent, ColumnsComponent, QueryEditorComponent, SecurityComponent]
+    ParametersComponent, ColumnsComponent, QueryEditorComponent, SecurityComponent, ParamLookupComponent]
 })
 export class ReportDetailsModule { }
