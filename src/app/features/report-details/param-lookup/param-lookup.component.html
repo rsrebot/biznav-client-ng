@@ -7,6 +7,9 @@
 <div *ngIf="displayMode === paramLookupMode.lookupSelected">
   <a href="#" [routerLink]="" class="text-info" (click)="showLookupEditor(templateLookup)">Lookup Values</a>
 </div>
+<div *ngIf="displayMode === paramLookupMode.system">
+  <a [routerLink]="" class="text-warning">System</a>
+</div>
 
 <ng-template #templateLookup>
   <div class="modal-header">
@@ -31,8 +34,8 @@
     <codemirror [(ngModel)]="code" #editor [config]="config">
     </codemirror>
     <div class="float-right mt-3">
-      <button class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
-      <button class="btn"><i class="fa fa-remove"></i> Cancel</button>
+      <button class="btn btn-primary" (click)="save()"><i class="fa fa-save"></i> Save</button>
+      <button class="btn" (click)="modalRef.hide()"><i class="fa fa-remove"></i> Cancel</button>
    </div>
   </div>
 </ng-template>

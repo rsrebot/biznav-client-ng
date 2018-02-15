@@ -54,6 +54,33 @@ export class ReportDetailsComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+  getStatus(): string {
+    switch (this.reportDefinition.misQuery.statusID) {
+      case 'RDY':
+        return 'READY';
+      case 'BTA':
+        return 'BETA';
+      case 'ALP':
+        return 'ALPHA';
+      default:
+        return this.reportDefinition.misQuery.statusID.toUpperCase();
+    }
+  }
+
+  getStatusClass(): string {
+    switch (this.reportDefinition.misQuery.statusID) {
+      case 'RDY':
+        return 'success';
+      case 'BTA':
+        return 'info';
+      case 'ALP':
+        return 'warning';
+      case 'OLD':
+        return 'danger';
+      default:
+        return 'danger';
+  }
+
   validateQuery() {
     this.reportDefinition.sql = this.queryComponent.code;
     this.reportsService.validateReportDefinition(this.reportDefinition).subscribe(resp => {

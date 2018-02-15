@@ -16,6 +16,12 @@ export class ParamLookupComponent implements OnInit {
   @Input('param')
   set setParam(val: TMisParam) {
     this.param = val;
+
+    if (this.param.isSystem) {
+      this.displayMode = ParamLookupMode.system;
+      return;
+    }
+
     if (!this.param.lookup) {
       this.displayMode = ParamLookupMode.noneSelected;
     } else {
@@ -50,6 +56,10 @@ export class ParamLookupComponent implements OnInit {
        Object.assign({}, { class: 'modal-lg' }));
   }
 
+  save() {
+    // this.code = this.editor.
+  }
+
   ngOnInit() {
   }
 
@@ -58,5 +68,6 @@ export class ParamLookupComponent implements OnInit {
 export enum ParamLookupMode {
   noneSelected,
   lookupSelected,
-  sqlSelected
+  sqlSelected,
+  system
 }

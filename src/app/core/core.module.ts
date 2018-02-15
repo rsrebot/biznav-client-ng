@@ -12,7 +12,7 @@ import { NotificationsService } from './notifications/notifications.service';
     CommonModule
   ],
   declarations: [],
-  providers: [AuthService, AuthInterceptor, AuthGuard, ReportsService, 
+  providers: [AuthService, AuthInterceptor, AuthGuard, ReportsService,
     ReferenceDataService, NotificationsService]
 })
 export class CoreModule { }
