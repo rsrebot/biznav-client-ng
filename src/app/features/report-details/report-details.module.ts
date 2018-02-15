@@ -12,6 +12,7 @@ import { ColumnsComponent } from './columns/columns.component';
 import { QueryEditorComponent } from './query-editor/query-editor.component';
 import { SecurityComponent } from './security/security.component';
 import { ParamLookupComponent } from './param-lookup/param-lookup.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { ParamLookupComponent } from './param-lookup/param-lookup.component';
     FormsModule,
     LoadingModule,
     TabsModule,
-    TypeaheadModule
+    TypeaheadModule,
+    BsDropdownModule
   ],
   declarations: [ReportDetailsComponent, GeneralInfoComponent,
     ParametersComponent, ColumnsComponent, QueryEditorComponent, SecurityComponent, ParamLookupComponent]

@@ -63,6 +63,23 @@ export class ParamLookupComponent implements OnInit {
   ngOnInit() {
   }
 
+  selectMode(mode: ParamLookupMode) {
+    this.displayMode = mode;
+  }
+
+  getActionText() {
+    switch (this.displayMode) {
+      case ParamLookupMode.system:
+        return 'System';
+      case ParamLookupMode.lookupSelected:
+        return 'Lookup Values';
+      case ParamLookupMode.noneSelected:
+        return 'None';
+      case ParamLookupMode.sqlSelected:
+        return 'Sql Query';
+    }
+  }
+
 }
 
 export enum ParamLookupMode {
