@@ -1,14 +1,32 @@
 <div class="card-body">
   <div class="card">
-    <div class="card-header">
+    <!-- <div class="card-header">
       <input name="secGroups"
           [(ngModel)] = "selected"
           [typeahead] = "groups"
           placeholder ="Type to filter security groups"
           class="form-control"/>
-    </div>
+    </div> -->
     <div class="card-body">
-      
+      <div class="row">
+        <div class="col-4">
+           <ul class="list-group" style="height:300px;overflow-y:auto;">
+              <li *ngFor="let group of groups" class="list-group-item p-1 mb-1">
+                {{group}}<a class="text-danger pull-right" [routerLink]="" (click)="assignGroup(group)"><i class="fa fa-remove"></i></a>
+              </li>
+            </ul>
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-4">
+            <ul class="list-group" style="height:300px;overflow-y:auto;">
+              <li *ngFor="let group of groups" class="list-group-item p-1 mb-1">
+                {{group}}<a class="text-danger pull-right" [routerLink]="" (click)="removeGroup(group)"><i class="fa fa-remove"></i></a>
+              </li>
+            </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

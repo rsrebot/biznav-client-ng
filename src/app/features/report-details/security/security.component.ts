@@ -20,6 +20,14 @@ export class SecurityComponent implements OnInit {
 
   constructor() { }
 
+  assignGroup(group: string) {
+
+  }
+
+  removeGroup(group: string) {
+
+  }
+
   ngOnInit() {
   }
 

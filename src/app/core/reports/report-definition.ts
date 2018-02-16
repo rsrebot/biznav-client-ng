@@ -210,6 +210,29 @@ export class TMisParam {
     public value: any = null;
     // POSITION
     public position = 0;
+
+    public static lookupMode(param: TMisParam): ParamLookupMode {
+        if (param.isSystem) {
+            return ParamLookupMode.system;
+        }
+
+        if (!param.lookup) {
+            return ParamLookupMode.none;
+        } else {
+            if (param.lookup.sql && param.lookup.sql.length > 0) {
+                return ParamLookupMode.sql;
+            } else {
+                return ParamLookupMode.lookupValues;
+            }
+        }
+    }
+}
+
+export enum ParamLookupMode {
+  none,
+  lookupValues,
+  sql,
+  system
 }
 
 export class TMisLookup {

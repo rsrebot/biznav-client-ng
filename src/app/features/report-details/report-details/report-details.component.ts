@@ -79,6 +79,7 @@ export class ReportDetailsComponent implements OnInit, OnDestroy {
         return 'danger';
       default:
         return 'danger';
+    }
   }
 
   validateQuery() {

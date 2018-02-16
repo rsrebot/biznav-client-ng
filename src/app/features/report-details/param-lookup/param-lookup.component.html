@@ -1,39 +1,46 @@
 <div *ngIf="displayMode === paramLookupMode.system">
-  <span class="text-warning">System</span>
+  <span class="text-primary">System</span>
 </div>
 
 <div class="btn-group" dropdown *ngIf="displayMode != paramLookupMode.system">
-  <button *ngIf="displayMode === paramLookupMode.lookupSelected" type="button" style="width:70px;"
-    class="btn btn-info btn-sm" (click)="showLookupEditor(templateLookup)">Lookup</button>
-  <button *ngIf="displayMode === paramLookupMode.sqlSelected" type="button" style="width:70px;"
-    class="btn btn-info btn-sm" (click)="showSqlEditor(templateSql)">SQL</button>
-  <button *ngIf="displayMode === paramLookupMode.noneSelected" type="button" style="width:70px;"
-    class="btn btn-info btn-sm">None</button>
-  <button type="button" dropdownToggle class="btn btn-info btn-sm dropdown-toggle dropdown-toggle-split">
+  <button *ngIf="displayMode === paramLookupMode.lookupValues" type="button" style="width:70px;"
+    class="btn btn-secondary btn-sm" (click)="showLookupEditor(templateLookup)">Lookup</button>
+  <button *ngIf="displayMode === paramLookupMode.sql" type="button" style="width:70px;"
+    class="btn btn-secondary btn-sm" (click)="showSqlEditor(templateSql)">SQL</button>
+  <button *ngIf="displayMode === paramLookupMode.none" type="button" style="width:70px;"
+    class="btn btn-secondary btn-sm">None</button>
+  <button type="button" dropdownToggle class="btn btn-secondary btn-sm dropdown-toggle dropdown-toggle-split">
     <span class="caret"></span>
     <span class="sr-only">Split button!</span>
   </button>
   <ul *dropdownMenu class="dropdown-menu" role="menu">
     <li role="menuitem"><a [routerLink]="" class="dropdown-item" href="#" 
-      (click)="selectMode(paramLookupMode.noneSelected)">None</a></li>
+      (click)="selectMode(paramLookupMode.none)">None</a></li>
     <li role="menuitem"><a [routerLink]="" class="dropdown-item" href="#" 
-      (click)="selectMode(paramLookupMode.sqlSelected)">SQL</a></li>
+      (click)="selectMode(paramLookupMode.sql)">SQL</a></li>
     <li role="menuitem"><a [routerLink]="" class="dropdown-item" href="#"
-       (click)="selectMode(paramLookupMode.lookupSelected)">Lookup</a></li>
+       (click)="selectMode(paramLookupMode.lookupValues)">Lookup</a></li>
   </ul>
 </div>
-
-
 
 <ng-template #templateLookup>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Lookup Values</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="cancelLookupValues()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    Lookup
+    <input type="text" class="form-control mb-1" placeholder="Type a value and press enter to add ..." [(ngModel)]="newLoopupvalue" (keypress)="addLookupValue($event)"/>
+    <ul class="list-group" style="height:300px;overflow-y:auto;">
+      <li *ngFor="let item of items" class="list-group-item p-1 mb-1">
+        {{item}}<a class="text-danger pull-right" [routerLink]="" (click)="removeLookupValue(item)"><i class="fa fa-remove"></i></a>
+      </li>
+    </ul>
+    <div class="float-right mt-3">
+      <button class="btn btn-primary" (click)="saveLookupValues()"><i class="fa fa-check"></i> Accept</button>
+      <button class="btn" (click)="cancelLookupValues()"><i class="fa fa-remove"></i> Cancel</button>
+    </div>
   </div>
 </ng-template>
 
@@ -48,7 +55,7 @@
     <codemirror [(ngModel)]="code" #editor [config]="config">
     </codemirror>
     <div class="float-right mt-3">
-      <button class="btn btn-primary" (click)="save()"><i class="fa fa-save"></i> Save</button>
+      <button class="btn btn-primary" (click)="saveSql()"><i class="fa fa-check"></i> Accept</button>
       <button class="btn" (click)="modalRef.hide()"><i class="fa fa-remove"></i> Cancel</button>
    </div>
   </div>
