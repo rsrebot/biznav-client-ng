@@ -1,12 +1,29 @@
-<div *ngIf="displayMode === paramLookupMode.noneSelected">
-  <a href="#" [routerLink]="" class="text-info">none</a>
+<div *ngIf="displayMode === paramLookupMode.system">
+  <span class="text-warning">System</span>
 </div>
-<div *ngIf="displayMode === paramLookupMode.sqlSelected">
-  <a href="#" [routerLink]="" class="text-info" (click)="showSqlEditor(templateSql)">SQL Query</a>
+
+<div class="btn-group" dropdown *ngIf="displayMode != paramLookupMode.system">
+  <button *ngIf="displayMode === paramLookupMode.lookupSelected" type="button" style="width:70px;"
+    class="btn btn-info btn-sm" (click)="showLookupEditor(templateLookup)">Lookup</button>
+  <button *ngIf="displayMode === paramLookupMode.sqlSelected" type="button" style="width:70px;"
+    class="btn btn-info btn-sm" (click)="showSqlEditor(templateSql)">SQL</button>
+  <button *ngIf="displayMode === paramLookupMode.noneSelected" type="button" style="width:70px;"
+    class="btn btn-info btn-sm">None</button>
+  <button type="button" dropdownToggle class="btn btn-info btn-sm dropdown-toggle dropdown-toggle-split">
+    <span class="caret"></span>
+    <span class="sr-only">Split button!</span>
+  </button>
+  <ul *dropdownMenu class="dropdown-menu" role="menu">
+    <li role="menuitem"><a [routerLink]="" class="dropdown-item" href="#" 
+      (click)="selectMode(paramLookupMode.noneSelected)">None</a></li>
+    <li role="menuitem"><a [routerLink]="" class="dropdown-item" href="#" 
+      (click)="selectMode(paramLookupMode.sqlSelected)">SQL</a></li>
+    <li role="menuitem"><a [routerLink]="" class="dropdown-item" href="#"
+       (click)="selectMode(paramLookupMode.lookupSelected)">Lookup</a></li>
+  </ul>
 </div>
-<div *ngIf="displayMode === paramLookupMode.lookupSelected">
-  <a href="#" [routerLink]="" class="text-info" (click)="showLookupEditor(templateLookup)">Lookup Values</a>
-</div>
+
+
 
 <ng-template #templateLookup>
   <div class="modal-header">
@@ -31,8 +48,8 @@
     <codemirror [(ngModel)]="code" #editor [config]="config">
     </codemirror>
     <div class="float-right mt-3">
-      <button class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
-      <button class="btn"><i class="fa fa-remove"></i> Cancel</button>
+      <button class="btn btn-primary" (click)="save()"><i class="fa fa-save"></i> Save</button>
+      <button class="btn" (click)="modalRef.hide()"><i class="fa fa-remove"></i> Cancel</button>
    </div>
   </div>
 </ng-template>

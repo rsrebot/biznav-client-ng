@@ -28,6 +28,6 @@ export class NotificationsService {
 }
 
 export class DRMessage {
-  constructor(public id: number, public displayText: string, public messageClassID: number){
+  constructor(public id: number, public displayText: string, public messageClassID: number) {
   }
 }

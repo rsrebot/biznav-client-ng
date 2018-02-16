@@ -1,11 +1,21 @@
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '0px' }"></ngx-loading>
-<div class="card card-header rounded-0">
-  <div class="row">
-    <div class="col-10">
-      <h4 *ngIf="reportDefinition">{{reportDefinition.caption}} - version: {{reportDefinition.misQuery.fileVersion}} - status: {{reportDefinition.misQuery.statusID}}</h4>
-      <h4 *ngIf="!reportDefinition">New Report</h4>
+<div class="card card-header rounded-0 p-2">
+  <div class="row" *ngIf="!reportDefinition">
+    <div class="col-7 pt-1">
+      <h5>New Report</h5>
     </div>
-    <div class="col-2">
+  </div>
+  <div class="row" *ngIf="reportDefinition">
+    <div class="col-7 pt-1">
+      <h5 class="mb-0">{{reportDefinition.caption}}</h5>
+    </div>
+    <div class="col-2 pt-1">
+      <h5 class="mb-0">version: {{reportDefinition.misQuery.fileVersion}}</h5>
+    </div>
+    <div class="col-2 pt-1">
+      <h5 class="mb-0 badge badge-pill" [ngClass]="'badge-' + getStatusClass()">{{getStatus()}}</h5>
+    </div>
+    <div class="col-1">
       <div class="btn-group pull-right">
         <button class="btn btn-primary btn-sm" [routerLink]="['../dashboard/reports']"><i class="fa fa-arrow-left"></i></button>
       </div>
